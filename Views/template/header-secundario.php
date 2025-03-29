@@ -3,22 +3,22 @@
 
 <head>
    <link rel="apple-touch-icon" sizes="57x57" href="<?php echo BASE_URL; ?>assets/favicon/apple-icon-57x57.png">
-    <link rel="apple-touch-icon" sizes="60x60" href="<?php echo BASE_URL; ?>assets/favicon/apple-icon-60x60.png">
-    <link rel="apple-touch-icon" sizes="72x72" href="<?php echo BASE_URL; ?>assets/favicon/apple-icon-72x72.png">
-    <link rel="apple-touch-icon" sizes="76x76" href="<?php echo BASE_URL; ?>assets/favicon/apple-icon-76x76.png">
-    <link rel="apple-touch-icon" sizes="114x114" href="<?php echo BASE_URL; ?>assets/favicon/apple-icon-114x114.png">
-    <link rel="apple-touch-icon" sizes="120x120" href="<?php echo BASE_URL; ?>assets/favicon/apple-icon-120x120.png">
-    <link rel="apple-touch-icon" sizes="144x144" href="<?php echo BASE_URL; ?>assets/favicon/apple-icon-144x144.png">
-    <link rel="apple-touch-icon" sizes="152x152" href="<?php echo BASE_URL; ?>assets/favicon/apple-icon-152x152.png">
-    <link rel="apple-touch-icon" sizes="180x180" href="<?php echo BASE_URL; ?>assets/favicon/apple-icon-180x180.png">
-    <link rel="icon" type="image/png" sizes="192x192" href="<?php echo BASE_URL; ?>assets/favicon/android-icon-192x192.png">
-    <link rel="icon" type="image/png" sizes="32x32" href="<?php echo BASE_URL; ?>assets/favicon/favicon-32x32.png">
-    <link rel="icon" type="image/png" sizes="96x96" href="<?php echo BASE_URL; ?>assets/favicon/favicon-96x96.png">
-    <link rel="icon" type="image/png" sizes="16x16" href="<?php echo BASE_URL; ?>assets/favicon/favicon-16x16.png">
-    <link rel="manifest" href="<?php echo BASE_URL; ?>assets/favicon/manifest.json">
-    <meta name="msapplication-TileColor" content="#ffffff">
-    <meta name="msapplication-TileImage" content="<?php echo BASE_URL; ?>assets/favicon/ms-icon-144x144.png">
-    <meta name="theme-color" content="#ffffff">
+   <link rel="apple-touch-icon" sizes="60x60" href="<?php echo BASE_URL; ?>assets/favicon/apple-icon-60x60.png">
+   <link rel="apple-touch-icon" sizes="72x72" href="<?php echo BASE_URL; ?>assets/favicon/apple-icon-72x72.png">
+   <link rel="apple-touch-icon" sizes="76x76" href="<?php echo BASE_URL; ?>assets/favicon/apple-icon-76x76.png">
+   <link rel="apple-touch-icon" sizes="114x114" href="<?php echo BASE_URL; ?>assets/favicon/apple-icon-114x114.png">
+   <link rel="apple-touch-icon" sizes="120x120" href="<?php echo BASE_URL; ?>assets/favicon/apple-icon-120x120.png">
+   <link rel="apple-touch-icon" sizes="144x144" href="<?php echo BASE_URL; ?>assets/favicon/apple-icon-144x144.png">
+   <link rel="apple-touch-icon" sizes="152x152" href="<?php echo BASE_URL; ?>assets/favicon/apple-icon-152x152.png">
+   <link rel="apple-touch-icon" sizes="180x180" href="<?php echo BASE_URL; ?>assets/favicon/apple-icon-180x180.png">
+   <link rel="icon" type="image/png" sizes="192x192" href="<?php echo BASE_URL; ?>assets/favicon/android-icon-192x192.png">
+   <link rel="icon" type="image/png" sizes="32x32" href="<?php echo BASE_URL; ?>assets/favicon/favicon-32x32.png">
+   <link rel="icon" type="image/png" sizes="96x96" href="<?php echo BASE_URL; ?>assets/favicon/favicon-96x96.png">
+   <link rel="icon" type="image/png" sizes="16x16" href="<?php echo BASE_URL; ?>assets/favicon/favicon-16x16.png">
+   <link rel="manifest" href="<?php echo BASE_URL; ?>assets/favicon/manifest.json">
+   <meta name="msapplication-TileColor" content="#ffffff">
+   <meta name="msapplication-TileImage" content="<?php echo BASE_URL; ?>assets/favicon/ms-icon-144x144.png">
+   <meta name="theme-color" content="#ffffff">
 
    <!-- basic -->
    <meta charset="utf-8">
@@ -67,28 +67,27 @@
       }
    </style>
 
-
    <nav style="background-color: #252525" class="navbar navbar-expand-lg navbar-bg navbar-dark d-none d-lg-block" id="templatemo_nav_top">
-        <div class="container text-light">
-            <div style="background-color:#252525" class="w-100 d-flex justify-content-between">
-                <div>
-                    <i class="fa fa-envelope mx-2"></i>
-                    <a class="navbar-sm-brand text-light text-decoration-none" href="mailto:Jperez540@misena.edu.co">Jperez540@misena.edu.co</a>
-                    <i class="fa fa-phone mx-2"></i>
-                    <a class="navbar-sm-brand text-light text-decoration-none" href="tel:+57300 4413069">+57 300 4413069</a>
-                </div>
-                <div class="d-flex justify-content-end align-items-center">
-                    <span class="me-2">Conoce nuestras redes | </span>
-                    <a class="text-light px-2" href="https://www.facebook.com/reel/6137300836308507?sfnsn=scwspwa&mibextid=5xHrnq" target="_blank" rel="sponsored">
-                        <i class="fab fa-facebook-f fa-sm fa-fw"></i>
-                    </a>
-                    <a class="text-light px-2" href="https://www.instagram.com/pijamas__shalom?igsh=MWY3YWtpaDBkNnhoZA==" target="_blank">
-                        <i class="fab fa-instagram fa-sm fa-fw"></i>
-                    </a>
-                </div>
+      <div class="container text-light">
+         <div style="background-color:#252525" class="w-100 d-flex justify-content-between">
+            <div>
+               <i class="fa fa-envelope mx-2"></i>
+               <a class="navbar-sm-brand text-light text-decoration-none" href="mailto:Jperez540@misena.edu.co">Jperez540@misena.edu.co</a>
+               <i class="fa fa-phone mx-2"></i>
+               <a class="navbar-sm-brand text-light text-decoration-none" href="tel:+57300 4413069">+57 300 4413069</a>
             </div>
-        </div>
-    </nav>
+            <div class="d-flex justify-content-end align-items-center">
+               <span class="me-2">Conoce nuestras redes | </span>
+               <a class="text-light px-2" href="https://www.facebook.com/reel/6137300836308507?sfnsn=scwspwa&mibextid=5xHrnq" target="_blank" rel="sponsored">
+                  <i class="fab fa-facebook-f fa-sm fa-fw"></i>
+               </a>
+               <a class="text-light px-2" href="https://www.instagram.com/pijamas__shalom?igsh=MWY3YWtpaDBkNnhoZA==" target="_blank">
+                  <i class="fab fa-instagram fa-sm fa-fw"></i>
+               </a>
+            </div>
+         </div>
+      </div>
+   </nav>
 </head>
 
 <body>
@@ -104,28 +103,26 @@
             </div>
          </div>
       </div>
-      
+
       <!-- logo section end -->
       <!-- header section start -->
       <div class="header_section">
          <div class="container">
-            <div class="containt_main">          
+            <div class="containt_main">
                <div id="mySidenav" class="sidenav">
                   <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
-                  <?php foreach ($data['categorias'] as $categoria) { ?>
-                     <a href="#categoria_<?php echo $categoria['id']; ?>"><?php echo $categoria['categoria']; ?></a>
-                  <?php } ?>
+                  <a href="<?php echo BASE_URL; ?>">TIENDA</a>
                </div>
                <span class="toggle_icon" onclick="openNav()"><img src="<?php echo BASE_URL; ?>assets/principal/images/toggle-icon.png"></span>
 
-               
+
 
 
                <div class="main">
                   <!-- Another variation with a button -->
-                  <div class="search-container">
                   <div class="input-group">
                      <input type="text" class="form-control" placeholder="¿Qué estas buscando?" id="search">
+
                      <div class="input-group-append">
                         <button class="btn btn-secondary" type="button" style="background-color: #f26522; border-color:#f26522 ">
                            <i class="fa fa-search"></i>
@@ -133,7 +130,6 @@
                      </div>
                   </div>
                   <div class="position-absolute row" id="resultBusqueda" style="z-index: 99999;"></div>
-                  </div>
                </div>
                <div class="header_box">
                   <div class="login_menu">

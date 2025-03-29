@@ -195,7 +195,9 @@ const token = getTokenFromUrl();
                         <p class="card-text">
                         ${precioFormateado}
                         </p>
-                        <div class="buy_bt"><a href="#" onclick="agregarCarrito(${producto.id}, 1)">Añadir</a></div>
+                        <div class="buy_bt">
+                          <a href="${base_url}principal/detail/${producto.id}">Ver detalle</a>
+                        </div>
                       </div>
                     </div>
                   </div>`;
