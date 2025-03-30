@@ -961,15 +961,6 @@ input.mail_bt::placeholder {
 
 /* boton finlizar pedido */
 
-#btnFinalizarPago {
-    margin-bottom: 50px;
-    padding: 15px 25px;
-    font-size: 20px;
-  }
-  #btnFinalizarPago i {
-    font-size: 50px;
-  }
-
   .flex-column-perfil {
     display: flex;
     flex-direction: column;

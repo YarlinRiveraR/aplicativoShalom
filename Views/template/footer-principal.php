@@ -129,31 +129,6 @@
   </div>
 </div>
 
-<!-- Botón de WhatsApp -->
-<div id="whatsapp-button">
-  <a href="https://wa.me/+573004413069?text=¡Chatea Conmigo!" target="_blank">
-    <img src="<?php echo BASE_URL . 'assets/images/whatsapp.jpg'; ?>">
-      </a>
-</div>
-<style>
-  #whatsapp-button {
-    position: fixed;
-    bottom: 20px;
-    right: 20px;
-    z-index: 1000;
-  }
-
-  #whatsapp-button img {
-    width: 70px;
-    /* Ajusta el tamaño del icono según sea necesario */
-    height: 70px;
-    border-radius: 50%;
-    /* Hace el icono circular, si el icono es cuadrado */
-  }
-</style>
-
-
-
 
 <!-- Login directo -->
 
@@ -180,7 +155,7 @@
             </div>
             <a href="#" id="btnRegister">Todavia no tienes una cuenta?</a>
             <div class="text-left">
-              <a href="#" id="btnForgot">Olvidaste tu contraseña</a>
+              <a href="#" id="btnForgot">¿Olvidaste tu contraseña?</a>
             </div>
             <div class="float-right">
               <button class="btn btn-primary" type="button" id="login">Login</button>
@@ -200,7 +175,7 @@
               <label for="claveRegistro"><i class="fas fa-key"></i> Contraseña</label>
               <input id="claveRegistro" class="form-control" type="text" name="claveRegistro" placeholder="Contraseña">
             </div>
-            <a href="#" id="btnLogin">Ya tienes una cuenta?</a>
+            <a href="#" id="btnLogin">¿Ya tienes una cuenta?</a>
             <div class="float-right">
               <button class="btn btn-primary" type="button" id="registrarse">Registrarse</button>
             </div>
