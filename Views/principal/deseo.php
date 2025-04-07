@@ -1,12 +1,14 @@
 <!-- NEW!!! -->
 <?php include_once 'Views/template/header-secundario.php'; ?>
 
-<style>@media (min-width: 577px) and (max-width: 1024px) {
+<style>
+@media (min-width: 577px) and (max-width: 1024px) {
   #tableListaDeseo td button {
     width: 100%;
-    margin: 7px;
+    margin: 12px;
   }
 }
+
 </style>
 
 <!-- Start Content -->

@@ -80,7 +80,7 @@
         <div class="row text-left p-2 pb-3">
             <h4 class="text-success" style="font-size: 28px; font-weight: bold;">Productos Relacionados</h4>
         </div>
-
+        
         <!--Start Carousel Wrapper-->
         <div id="carousel-related-product">
             <?php foreach ($data['relacionados'] as $producto) { ?>
@@ -91,7 +91,7 @@
                             <div class="card-img-overlay rounded-0 product-overlay d-flex align-items-center justify-content-center">
                                 <ul class="list-unstyled">
                                     <li>
-                                        <a class="btn btn-success text-white mt-2" href="<?php echo BASE_URL . 'principal/detail/' . $producto['id']; ?>">
+                                        <a class="eye-link" href="<?php echo BASE_URL . 'principal/detail/' . $producto['id']; ?>">
                                             <i class="fas fa-eye eye-icon"></i>
                                         </a>
                                     </li>
@@ -138,16 +138,13 @@
 
   /* Estilo del ícono de ojo */
   .eye-icon {
-    opacity: 0;
-    transition: opacity 0.3s ease, transform 0.3s ease;
-    font-size: 38px; /* más grande */
+    font-size: 30px;
     color: white;
-    border-radius: 50%; /* totalmente redondo */
-    padding: 10px;
-    pointer-events: auto;
+    opacity: 0;
+    transform: scale(0.9);
+    transition: opacity 0.3s ease, transform 0.3s ease;
   }
 
-  /* Mostrar el ícono al hacer hover */
   .card-prod:hover .eye-icon {
     opacity: 1;
     transform: scale(1.1);
@@ -158,10 +155,30 @@
     cursor: pointer;
   }
 
+  /* Nuevo: contenedor circular para el icono */
+  .eye-link {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: rgba(255, 255, 255, 0.2);
+    border-radius: 50%;
+    width: 60px;
+    height: 60px;
+    text-decoration: none;
+    transition: background-color 0.3s ease, transform 0.3s ease;
+  }
+
+  .eye-link:hover {
+    background-color: rgba(255, 255, 255, 0.3);
+    transform: scale(1.1);
+  }
+
   /* Padding para los títulos de las tarjetas */
   .product-wap .card-body h4 {
-    padding: 10px 0;
-  }
+  font-size: 16px;
+  padding: 10px 0;
+  line-height: 1.2;
+}
 
   /* Otros estilos ya existentes */
   .col-auto {
@@ -214,10 +231,6 @@
     justify-content: center;
   }
 </style>
-
-
-
-
 
 <?php include_once 'Views/template/footer-secundario.php'; ?>
 
