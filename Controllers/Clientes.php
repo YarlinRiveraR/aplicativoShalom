@@ -75,6 +75,8 @@ class Clientes extends Controller
                 $mail->SMTPSecure = PHPMailer::ENCRYPTION_SMTPS;            //Habilitar cifrado TLS implícito
                 $mail->Port       = PUERTO_SMTP;                                    //Puerto TCP para conectarse; usa 587 si has configurado `SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS`
 
+                $mail->CharSet = 'UTF-8';
+
                 //Destinatarios
                 $mail->setFrom('pijamas.shalom.notificaciones@gmail.com', TITLE);
                 $mail->addAddress($_POST['correo']);

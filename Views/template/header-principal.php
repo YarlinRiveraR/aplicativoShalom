@@ -71,12 +71,12 @@
    <nav style="background-color: #252525" class="navbar navbar-expand-lg navbar-bg navbar-dark d-none d-lg-block" id="templatemo_nav_top">
         <div class="container text-light">
             <div style="background-color:#252525" class="w-100 d-flex justify-content-between">
-                <div>
-                    <i class="fa fa-envelope mx-2"></i>
-                    <a class="navbar-sm-brand text-light text-decoration-none" href="mailto:Jperez540@misena.edu.co">Jperez540@misena.edu.co</a>
-                    <i class="fa fa-phone mx-2"></i>
-                    <a class="navbar-sm-brand text-light text-decoration-none" href="tel:+57300 4413069">+57 300 4413069</a>
-                </div>
+               <div>
+                  <i class="fa fa-envelope mx-2"></i>
+                  <a class="navbar-sm-brand text-light text-decoration-none" href="https://mail.google.com/mail/?view=cm&fs=1&to=yacquelinepa6045@gmail.com" target="_blank">yacquelinepa6045@gmail.com</a>
+                  <i class="fa fa-phone mx-2"></i>
+                  <a class="navbar-sm-brand text-light text-decoration-none" href="https://wa.me/573138284564" target="_blank">+57 313 8284564</a>
+               </div>
                 <div class="d-flex justify-content-end align-items-center">
                     <span class="me-2">Conoce nuestras redes | </span>
                     <a class="text-light px-2" href="https://www.facebook.com/reel/6137300836308507?sfnsn=scwspwa&mibextid=5xHrnq" target="_blank" rel="sponsored">
