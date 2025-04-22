@@ -84,7 +84,7 @@ class Clientes extends Controller
                 //Contenido
                 $mail->isHTML(true);                                  //Establecer formato de correo como HTML
                 $mail->Subject = 'Mensaje desde la: ' . TITLE;
-                $mail->Body    = 'Para verificar tu correo en nuestra tienda <a href="' . BASE_URL . 'clientes/verificarCorreo/' . $_POST['token'] . '">CLIC AQUÍ</a>';
+                $mail->Body    = 'Para verificar tu correo en nuestra tienda <a href="' . BASE_URL . 'clientes/verificarCorreo/' . $_POST['token'] . '">CLICK AQUÍ</a>';
                 $mail->AltBody = 'GRACIAS POR LA PREFERENCIA';
 
                 $mail->send();
