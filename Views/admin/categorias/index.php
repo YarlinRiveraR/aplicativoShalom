@@ -53,7 +53,7 @@
 
 <?php include_once 'Views/template/footer-admin.php'; ?>
 
-
+<script src="<?php echo BASE_URL . 'assets/js/modulos/categorias.js'; ?>"></script>
 
 </body>
 
