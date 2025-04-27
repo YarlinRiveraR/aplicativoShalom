@@ -4,8 +4,8 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-  <link rel="apple-touch-icon" sizes="76x76" href="<?php echo BASE_URL; ?>assets/admin/img/apple-icon.png">
-  <link rel="icon" type="image/png" href="<?php echo BASE_URL; ?>assets/admin/img/favicon.png">
+  <!-- <link rel="apple-touch-icon" sizes="76x76" href="?php echo BASE_URL; ?>assets/admin/img/apple-icon.png">
+  <link rel="icon" type="image/png" href="?php echo BASE_URL; ?>assets/admin/img/favicon.png"> -->
   <title>
     <?php echo $data['title']; ?>
   </title>
@@ -61,6 +61,10 @@
                   <div class="text-center">
                     <button type="submit" class="btn bg-gradient-primary w-100 my-4 mb-2">Iniciar</button>
                   </div>
+                  <!-- NEW!!! -->
+                  <div class="text-center">
+                    <a href="<?php echo BASE_URL . 'admin/recovery'; ?>">¿Olvidaste tu contraseña?</a>
+                  </div>
                 </form>
               </div>
             </div>
@@ -80,7 +84,8 @@
               </div>
             </div>
             <div class="col-auto">
-              
+            <div class="footer_logo">
+                <img src="<?php echo BASE_URL . 'assets/images/logo_sistemas.jpg'; ?>" alt="Logo">
             </div>
           </div>
         </div>
@@ -89,7 +94,27 @@
   </main>
 
 
-  
+  <!--   Core JS Files   -->
+  <script src="<?php echo BASE_URL; ?>assets/admin/js/core/popper.min.js"></script>
+  <script src="<?php echo BASE_URL; ?>assets/admin/js/core/bootstrap.min.js"></script>
+  <script src="<?php echo BASE_URL; ?>assets/admin/js/plugins/perfect-scrollbar.min.js"></script>
+  <script src="<?php echo BASE_URL; ?>assets/admin/js/plugins/smooth-scrollbar.min.js"></script>
+  <script>
+    var win = navigator.platform.indexOf('Win') > -1;
+    if (win && document.querySelector('#sidenav-scrollbar')) {
+      var options = {
+        damping: '0.5'
+      }
+      Scrollbar.init(document.querySelector('#sidenav-scrollbar'), options);
+    }
+  </script>
+  <!-- Control Center for Material Dashboard: parallax effects, scripts for the example pages etc -->
+  <script src="<?php echo BASE_URL; ?>assets/admin/js/material-dashboard.min.js?v=3.1.0"></script>
+  <script>
+    const base_url = '<?php echo BASE_URL; ?>';
+  </script>
+  <script src="<?php echo BASE_URL; ?>assets/js/sweetalert2.all.min.js"></script>
+  <script src="<?php echo BASE_URL; ?>assets/js/modulos/login.js"></script>
 </body>
 
 </html>
