@@ -90,6 +90,22 @@ class Usuarios extends Controller
         die();
     }
 
+    //eliminar usuario
+    public function delete($idUser)
+    {
+        if (is_numeric($idUser)) {
+            $data = $this->model->eliminar($idUser);
+            if ($data == 1) {
+                $respuesta = array('msg' => 'usuario dado de baja', 'icono' => 'success');
+            } else {
+                $respuesta = array('msg' => 'error al eliminar', 'icono' => 'error');
+            }
+        } else {
+            $respuesta = array('msg' => 'error desconocido', 'icono' => 'error');
+        }
+        echo json_encode($respuesta);
+        die();
+    }
     //editar usuario
     public function edit($idUser)
     {
