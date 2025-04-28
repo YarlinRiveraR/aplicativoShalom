@@ -148,6 +148,19 @@ public function resetPassword($token) {
         die();
     }
 
+    //muestra la página principal de administración si el está logueado, muestra las estadísticas
+    public function home()
+    {
+        if (empty($_SESSION['nombre_usuario'])) {
+            header('Location: '. BASE_URL . 'admin');
+            exit;
+        }
+        $data['title'] = 'administracion';
+        
+        
+        $this->views->getView('admin/administracion', "index", $data);
+    }
+
     
     // Método para cerrar la sesión del usuario
     public function salir()
