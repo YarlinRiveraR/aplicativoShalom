@@ -22,6 +22,13 @@ class UsuariosModel extends Query{
         return $this->select($sql);
     }
 
+    public function eliminar($idUser)
+    {
+        $sql = "UPDATE usuarios SET estado = ? WHERE id = ?";
+        $array = array(0, $idUser);
+        return $this->save($sql, $array);
+    }
+
     public function getUsuario($idUser)
     {
         $sql = "SELECT id, nombres, apellidos, correo FROM usuarios WHERE id = $idUser";
