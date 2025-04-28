@@ -23,6 +23,13 @@ class ProductosModel extends Query{
         return $this->insertar($sql, $array);
     }
 
+    public function eliminar($idPro)
+    {
+        $sql = "UPDATE productos SET estado = ? WHERE id = ?";
+        $array = array(0, $idPro);
+        return $this->save($sql, $array);
+    }
+
     public function getProducto($idPro)
     {
         $sql = "SELECT * FROM productos WHERE id = $idPro";
