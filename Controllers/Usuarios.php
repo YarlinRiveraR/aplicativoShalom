@@ -89,4 +89,14 @@ class Usuarios extends Controller
         // Termina la ejecución del script
         die();
     }
+
+    //editar usuario
+    public function edit($idUser)
+    {
+        if (is_numeric($idUser)) {
+            $data = $this->model->getUsuario($idUser);
+            echo json_encode($data, JSON_UNESCAPED_UNICODE);
+        }
+        die();
+    }
 }
