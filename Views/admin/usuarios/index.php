@@ -61,6 +61,8 @@
 
 <?php include_once 'Views/template/footer-admin.php'; ?>
 
+<script src="<?php echo BASE_URL . 'assets/js/modulos/usuarios.js'; ?>"></script>
+
 </body>
 
 </html>
