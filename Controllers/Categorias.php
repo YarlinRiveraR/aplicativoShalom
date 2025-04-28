@@ -95,5 +95,4 @@ class Categorias extends Controller
         }
         die();
     }
-    //obtener los datos de una categoría específica por su ID (editar)
 }
