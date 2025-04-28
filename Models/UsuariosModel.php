@@ -28,6 +28,12 @@ class UsuariosModel extends Query{
         return $this->select($sql);
     }
 
+    public function modificar($nombre, $apellido, $correo, $id)
+    {
+        $sql = "UPDATE usuarios SET nombres=?, apellidos=?, correo=? WHERE id = ?";
+        $array = array($nombre, $apellido, $correo, $id);
+        return $this->save($sql, $array);
+    }
 }
  
 ?>
