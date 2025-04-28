@@ -38,7 +38,6 @@ class Productos extends Controller
 
     public function registrar()
     {
-        // Verifica si los campos 'nombre' y 'precio' están presentes en la solicitud POST
         if (isset($_POST['nombre']) && isset($_POST['precio'])) {
             $nombre = $_POST['nombre'];
             $precio = ($_POST['precio']);
