@@ -38,6 +38,7 @@ class Productos extends Controller
 
     public function registrar()
     {
+        // Verifica si los campos 'nombre' y 'precio' están presentes en la solicitud POST
         if (isset($_POST['nombre']) && isset($_POST['precio'])) {
             $nombre = $_POST['nombre'];
             $precio = ($_POST['precio']);
@@ -91,6 +92,36 @@ class Productos extends Controller
         }
         die();
     }
+    //eliminar productos
+    public function delete($idPro)
+    {
+        if (is_numeric($idPro)) {
+            // Se intenta eliminar el producto a través del modelo
+            $data = $this->model->eliminar($idPro);
+            if ($data == 1) {
+                // Si la eliminación es exitosa, se prepara una respuesta de éxito
+                $respuesta = array('msg' => 'producto dado de baja', 'icono' => 'success');
+            } else {
+                // Si ocurre un error al eliminar, se prepara una respuesta de error
+                $respuesta = array('msg' => 'error al eliminar', 'icono' => 'error');
+            }
+        } else {
+            $respuesta = array('msg' => 'error desconocido', 'icono' => 'error');
+        }
+        echo json_encode($respuesta);
+        die();
+    }
+    //editar productos
+    public function edit($idPro)
+    {
+        if (is_numeric($idPro)) {
+            // Se obtienen los datos del producto desde el modelo
+            $data = $this->model->getProducto($idPro);
+            // Se envían los datos del producto como JSON para ser consumidos por el frontend
+            echo json_encode($data, JSON_UNESCAPED_UNICODE);
+        }
+        die();
+    }
 
     public function galeriaImagenes()
     {
@@ -141,4 +172,22 @@ class Productos extends Controller
         die();
     }
 
+    public function eliminarImg()
+    {
+        // Se obtiene el cuerpo de la solicitud que contiene los datos enviados en formato JSON
+        $datos = file_get_contents('php://input');
+
+        // Se decodifican los datos JSON a un array asociativo
+        $json = json_decode($datos, true);
+
+        // Se establece la ruta del archivo a eliminar basado en la URL proporcionada en los datos JSON
+        $destino = 'assets/images/productos/' . $json['url'];
+        if (unlink($destino)) {
+            $res = array('msg' => 'IMAGEN ELIMINADO', 'icono' => 'success');
+        } else {
+            $res = array('msg' => 'ERROR AL ELIMINAR', 'icono' => 'error');
+        }
+        echo json_encode($res);
+        die();
+    }
 }
