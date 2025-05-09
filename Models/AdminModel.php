@@ -10,6 +10,12 @@ class AdminModel extends Query{
         $sql = "SELECT * FROM usuarios WHERE correo = '$correo'";
         return $this->select($sql);
     }
+    public function getTotales($estado)
+    {
+        $sql = "SELECT COUNT(*) AS total FROM pedidos WHERE proceso = $estado";
+        return $this->select($sql);
+    }
+    
     // Actualiza el token de recuperación para el usuario identificado por su correo
     public function updateToken($correo, $token) {
         $sql = "UPDATE usuarios SET token = ? WHERE correo = ?";
