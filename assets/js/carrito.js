@@ -29,7 +29,7 @@ document.addEventListener("DOMContentLoaded", function () {
         });
     }
     cantidadDeseo();
-    
+    cantidadCarrito();
 
     verCarrito.addEventListener('click', function () {
         getListaCarrito();
@@ -101,6 +101,8 @@ function agregarCarrito(idProducto, cantidad, talla, accion = false) {
     localStorage.setItem("listaCarrito", JSON.stringify(listaCarrito));
     alertaPerzanalizada("PRODUCTO AGREGADO AL CARRITO", "success");
 
+    cantidadCarrito();
+
 }
 
 //ver carrito
@@ -134,7 +136,29 @@ function getListaCarrito() {
 
             tableListaCarrito.innerHTML = html;
             document.querySelector('#totalGeneral').textContent = res.total + ' ' + res.moneda;
-            
+            cambiarCantidad();
         }
     }
+}
+
+//cambiar la cantidad
+function cambiarCantidad() {
+    let listaCantidad = document.querySelectorAll('.agregarCantidad');
+    for (let i = 0; i < listaCantidad.length; i++) {
+        listaCantidad[i].addEventListener('change', function () {
+            let idProducto = listaCantidad[i].id;
+            let cantidad = listaCantidad[i].value
+            incrementarCantidad(idProducto, cantidad);
+        })
+    }
+}
+
+//incrementar la cantidad
+function incrementarCantidad(idProducto, cantidad) {
+    for (let i = 0; i < listaCarrito.length; i++) {
+        if (listaCarrito[i]['idProducto'] == idProducto) {
+            listaCarrito[i].cantidad = cantidad;
+        }
+    }
+    localStorage.setItem('listaCarrito', JSON.stringify(listaCarrito));
 }
