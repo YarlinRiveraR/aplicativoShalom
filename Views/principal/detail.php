@@ -55,6 +55,11 @@
                                     </ul>
                                 </div>
                             </div>
+                             <div class="row pb-3">
+                                <div class="col d-grid">
+                                    <button type="button" class="btn btn-success btn-lg" id="btnAddCart">Añadir al carrito</button>
+                                </div>
+                            </div>
                             <div class="row pb-3">
                                 <div class="col d-grid">
                                     <button type="button" class="btn btn-success btn-lg" id="btnAddWish">Lista de deseos</button>
