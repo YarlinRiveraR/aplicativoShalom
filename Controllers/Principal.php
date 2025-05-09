@@ -9,6 +9,39 @@ class Principal extends Controller
         session_start();
     }
 
+    //obtener producto a partir de la lista de carrito
+    public function listaProductos()
+    {
+        $datos = file_get_contents('php://input');
+        $json = json_decode($datos, true);
+        $array['productos'] = array();
+        //NEW!!!
+        $total = 0;
+        if (!empty($json)) {
+            foreach ($json as $producto) {
+                $result = $this->model->getProducto($producto['idProducto']);
+                $data['id'] = $result['id'];
+                $data['nombre'] = $result['nombre'];
+                //NEW!!!
+                $data['precio'] = formatearMoneda($result['precio']);
+                $data['cantidad'] = $producto['cantidad'];
+                $data['imagen'] = $result['imagen'];
+                $subTotal = $result['precio'] * $producto['cantidad'];
+                //NEW!!!
+                $data['subTotal'] = formatearMoneda($subTotal);
+                array_push($array['productos'], $data);
+                $total += $subTotal;
+            }
+        }  
+        //NEW!!!      
+        $array['total'] = formatearMoneda($total);
+        //NEW!!! REVISAR!!!
+        $array['totalPaypal'] = number_format($total, 2, '.', '');
+        $array['moneda'] = MONEDA;
+        echo json_encode($array, JSON_UNESCAPED_UNICODE);
+        die();
+    }
+
     public function busqueda($valor)
     {
         $data = $this->model->getBusqueda($valor);
