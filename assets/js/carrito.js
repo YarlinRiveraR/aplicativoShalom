@@ -1,4 +1,5 @@
 const btnAddcarrito = document.querySelectorAll(".btnAddcarrito");
+const btnCarrito = document.querySelector("#btnCantidadCarrito");
 const verCarrito = document.querySelector('#verCarrito');
 const tableListaCarrito = document.querySelector('#tableListaCarrito tbody');
 const btnAddDeseo = document.querySelectorAll(".btnAddDeseo");
@@ -98,8 +99,8 @@ function agregarCarrito(idProducto, cantidad, talla, accion = false) {
         talla: talla,
     });
     localStorage.setItem("listaCarrito", JSON.stringify(listaCarrito));
-    alertaPerzanalizada("PRODUCTO AGREGADO AL CARRITO", "success")
-    
+    alertaPerzanalizada("PRODUCTO AGREGADO AL CARRITO", "success");
+
 }
 
 //ver carrito
@@ -124,6 +125,9 @@ function getListaCarrito() {
                     <td>${producto.nombre}</td>
                     <td><span class="badge bg-warning">${res.moneda + ' ' + producto.precio}</span></td>
                     <td>${miTalla[i].talla}</td>
+                    <td width="100">
+                    <input type="number" class="form-control agregarCantidad" id="${producto.id}" value="${producto.cantidad}">
+                    </td>
                     <td>${producto.subTotal}</td>
                 </tr>`;
             }
