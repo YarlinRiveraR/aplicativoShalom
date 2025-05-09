@@ -105,6 +105,15 @@ function agregarCarrito(idProducto, cantidad, talla, accion = false) {
 
 }
 
+function cantidadCarrito() {
+    let listas = JSON.parse(localStorage.getItem("listaCarrito"));
+    if (listas != null) {
+        btnCarrito.textContent = listas.length;
+    } else {
+        btnCarrito.textContent = 0;
+    }
+}
+
 //ver carrito
 function getListaCarrito() {
     const miTalla = JSON.parse(localStorage.getItem('listaCarrito'));
