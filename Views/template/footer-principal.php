@@ -86,7 +86,45 @@
 </style>
 
 
-
+<div class="modal fade" id="modalCarrito" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-lg">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title">Mi carrito</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <div class="table-responsive">
+          <table class="table table-bordered table-striped table-hover align-middle" id="tableListaCarrito">
+            <thead>
+              <tr>
+                <th>#</th>
+                <th>Producto</th>
+                <th>Precio</th>
+                <th>Talla</th>
+                <th>Cantidad</th>
+                <th>SubTotal</th>
+                <th></th>
+              </tr>
+            </thead>
+            <tbody>
+            </tbody>
+          </table>
+        </div>
+      </div>
+      <div class="d-flex justify-content-around mb-3">
+        <h3 id="totalGeneral"></h3>
+        <?php if (!empty($_SESSION['correoCliente'])) { ?>
+          <a class="btn btn-outline-primary" href="<?php echo BASE_URL . 'clientes'; ?>">Procesar Pedido</a>
+        <?php } else { ?>
+          <a class="btn btn-outline-primary" href="#" onclick="abrirModalLogin();">Login</a>
+        <?php } ?>
+      </div>
+    </div>
+  </div>
+</div>
 
 
 
