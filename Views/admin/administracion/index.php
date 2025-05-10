@@ -46,6 +46,7 @@
                 </div>
                 <div class="text-end pt-1">
                     <p class="text-sm mb-0 text-capitalize">Productos</p>
+                    <h4 class="mb-0"><?php echo $data['productos']['total']; ?></h4>
                 </div>
             </div>
         </div>
