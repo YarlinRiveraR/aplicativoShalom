@@ -9,6 +9,7 @@
                 </div>
                 <div class="text-end pt-1">
                     <p class="text-sm mb-0 text-capitalize">Pendientes</p>
+                    <h4 class="mb-0"><?php echo $data['pendientes']['total']; ?></h4>
                 </div>
             </div>
         </div>
