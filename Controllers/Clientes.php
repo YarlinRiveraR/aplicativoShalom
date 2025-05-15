@@ -62,39 +62,49 @@ class Clientes extends Controller
     //enviar un correo de verificación al cliente
     public function enviarCorreo()
     {
-        if (isset($_POST['correo']) && isset($_POST['token'])) {
+        // Recibimos correo y token por POST
+        if (isset($_POST['correo'], $_POST['token'])) {
+            $correo = $_POST['correo'];
+            $token  = $_POST['token'];
+
+            $cliente = $this->model->getVerificar($correo);
+            $nombre  = $cliente['nombre'] ?? 'Cliente';
+
+            ob_start();
+            include __DIR__ . '/../Views/principal/email.php';
+            $htmlBody = ob_get_clean();
+
             $mail = new PHPMailer(true);
             try {
                 //Configuración del servidor
-                $mail->SMTPDebug = 0;                      //Habilitar salida detallada para depuración
-                $mail->isSMTP();                                            //Enviar utilizando SMTP
-                $mail->Host       = HOST_SMTP;                     //Establecer el servidor SMTP para enviar a través de él
-                $mail->SMTPAuth   = true;                                   //Habilitar autenticación SMTP
-                $mail->Username   = USER_SMTP;                     //Nombre de usuario SMTP
-                $mail->Password   = PASS_SMTP;                               //Contraseña SMTP
-                $mail->SMTPSecure = PHPMailer::ENCRYPTION_SMTPS;            //Habilitar cifrado TLS implícito
-                $mail->Port       = PUERTO_SMTP;                                    //Puerto TCP para conectarse; usa 587 si has configurado `SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS`
-
-                $mail->CharSet = 'UTF-8';
+                $mail->isSMTP();
+                $mail->Host       = HOST_SMTP;
+                $mail->SMTPAuth   = true;
+                $mail->Username   = USER_SMTP;
+                $mail->Password   = PASS_SMTP;
+                $mail->SMTPSecure = PHPMailer::ENCRYPTION_SMTPS;
+                $mail->Port       = PUERTO_SMTP;
+                $mail->CharSet    = 'UTF-8';
 
                 //Destinatarios
                 $mail->setFrom('pijamas.shalom.notificaciones@gmail.com', TITLE);
-                $mail->addAddress($_POST['correo']);
+                $mail->addAddress($correo);
 
                 //Contenido
-                $mail->isHTML(true);                                  //Establecer formato de correo como HTML
-                $mail->Subject = 'Mensaje desde la: ' . TITLE;
-                $mail->Body    = 'Para verificar tu correo en nuestra tienda <a href="' . BASE_URL . 'clientes/verificarCorreo/' . $_POST['token'] . '">CLIC AQUÍ</a>';
-                $mail->AltBody = 'GRACIAS POR LA PREFERENCIA';
+                $mail->isHTML(true);
+                $mail->Subject = 'Verifica tu cuenta en ' . TITLE;
+                $mail->Body    = $htmlBody;
+                $mail->AltBody = 'Para verificar tu cuenta visita: ' . BASE_URL . 'clientes/verificarCorreo/' . $token;
 
                 $mail->send();
-                $mensaje = array('msg' => 'CORREO ENVIADO, REVISA TU BANDEJA DE ENTRADA - SPAN', 'icono' => 'success');
+                $mensaje = ['msg'=>'CORREO ENVIADO, REVISA TU BANDEJA DE ENTRADA - SPAM','icono'=>'success'];
             } catch (Exception $e) {
-                $mensaje = array('msg' => 'ERROR AL ENVIAR CORREO: ' . $mail->ErrorInfo, 'icono' => 'error');
+                $mensaje = ['msg'=>'ERROR AL ENVIAR CORREO: '.$mail->ErrorInfo,'icono'=>'error'];
             }
         } else {
-            $mensaje = array('msg' => 'ERROR FATAL: ', 'icono' => 'error');
+            $mensaje = ['msg'=>'DATOS INCOMPLETOS','icono'=>'error'];
         }
+
         echo json_encode($mensaje, JSON_UNESCAPED_UNICODE);
         die();
     }
