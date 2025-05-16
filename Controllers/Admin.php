@@ -162,11 +162,38 @@ public function resetPassword($token) {
             exit;
         }
         $data['title'] = 'administracion';
-        
-        
+        $data['pendientes'] = $this->model->getTotales(1);
+        $data['procesos'] = $this->model->getTotales(2);
+        $data['finalizados'] = $this->model->getTotales(3);
+        $data['productos'] = $this->model->getProductos();
         $this->views->getView('admin/administracion', "index", $data);
     }
 
+    //obtener los productos con cantidades mínimas
+    public function productosMinimos()
+    {
+        if (empty($_SESSION['nombre_usuario'])) {
+            header('Location: '. BASE_URL . 'admin');
+            exit;
+        }
+        $data = $this->model->productosMinimos();
+        echo json_encode($data, JSON_UNESCAPED_UNICODE);
+        die();
+
+    }
+
+    //obtener los productos más vendidos
+    public function topProductos()
+    {
+        if (empty($_SESSION['nombre_usuario'])) {
+            header('Location: '. BASE_URL . 'admin');
+            exit;
+        }
+        $data = $this->model->topProductos();
+        echo json_encode($data, JSON_UNESCAPED_UNICODE);
+        die();
+
+    }
     
     // Método para cerrar la sesión del usuario
     public function salir()
