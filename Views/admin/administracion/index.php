@@ -77,11 +77,15 @@
                     </div>
                 </div>
             </div>
-           
+            <div class="card-body">
+                <div class="chart-container-1">
+                    <canvas id="chart4"></canvas>
+                </div>
+            </div>
         </div>
     </div>
 
-    <div class="col-12 col-lg-4">
+   <div class="col-12 col-lg-4">
         <div class="card radius-10 w-100">
             <div class="card-header bg-transparent">
                 <div class="d-flex align-items-center">
@@ -90,7 +94,11 @@
                     </div>
                 </div>
             </div>
-           
+            <div class="card-body">
+                <div class="chart-container-1">
+                    <canvas id="topProductos"></canvas>
+                </div>
+            </div>
         </div>
     </div>
 </div>
