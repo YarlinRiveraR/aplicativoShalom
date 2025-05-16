@@ -27,7 +27,7 @@ class Admin extends Controller
         $data['title'] = 'Recuperar Contraseña';
         $this->views->getView('admin', "recovery", $data);
     }
-    public function sendRecovery() {
+     public function sendRecovery() {
         if (isset($_POST['email']) && !empty($_POST['email'])) {
             $correo = $_POST['email'];
             $dataUser = $this->model->getUsuario($correo);
@@ -35,6 +35,12 @@ class Admin extends Controller
                 $token = md5(uniqid(rand(), true));
                 $update = $this->model->updateToken($correo, $token);
                 if ($update) {
+                    $nombre = $dataUser['nombres'];
+
+                    ob_start();
+                    include __DIR__ . '/../Views/admin/email_cambiarPassword.php';
+                    $htmlBody = ob_get_clean();
+
                     $mail = new PHPMailer(true);
                     try {
                         $mail->SMTPDebug = 0;
@@ -54,8 +60,8 @@ class Admin extends Controller
                         // Contenido del correo
                         $mail->isHTML(true);
                         $mail->Subject = 'Recuperación de Contraseña - ' . TITLE;
-                        $mail->Body    = 'Para recuperar tu contraseña, haz clic en el siguiente enlace: <a href="' . BASE_URL . 'admin/resetPassword/' . $token . '">Recuperar Contraseña</a>';
-                        $mail->AltBody = 'Para recuperar tu contraseña, visita: ' . BASE_URL . 'admin/resetPassword/' . $token;
+                        $mail->Body    = $htmlBody;
+                        $mail->AltBody = 'Visita: ' . BASE_URL . 'admin/resetPassword/' . $token;
 
                         $mail->send();
                         $mensaje = array('msg' => 'Correo enviado. Revisa tu bandeja de entrada.', 'icono' => 'success');

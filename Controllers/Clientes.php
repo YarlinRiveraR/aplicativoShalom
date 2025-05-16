@@ -71,7 +71,7 @@ class Clientes extends Controller
             $nombre  = $cliente['nombre'] ?? 'Cliente';
 
             ob_start();
-            include __DIR__ . '/../Views/principal/email.php';
+            include __DIR__ . '/../Views/principal/email_registrarCuenta.php';
             $htmlBody = ob_get_clean();
 
             $mail = new PHPMailer(true);
@@ -157,6 +157,12 @@ class Clientes extends Controller
                 $token = md5(uniqid(rand(), true));
                 $update = $this->model->updateToken($correo, $token);
                 if ($update) {
+                     $nombre = $cliente['nombre'] ?? 'Cliente';
+
+                    ob_start();
+                    include __DIR__ . '/../Views/principal/email_recuperarContraseña.php';
+                    $htmlBody = ob_get_clean();
+
                     $mail = new PHPMailer(true);
                     try {
                         $mail->SMTPDebug = 0;
@@ -175,7 +181,7 @@ class Clientes extends Controller
 
                         $mail->isHTML(true);
                         $mail->Subject = 'Recuperación de Contraseña - ' . TITLE;
-                        $mail->Body    = 'Para recuperar tu contraseña, haz clic en el siguiente enlace: <a href="' . BASE_URL . '?resetToken=' . $token . '">Recuperar Contraseña</a>';
+                        $mail->Body    = $htmlBody;
                         $mail->AltBody = 'Para recuperar tu contraseña, visita: ' . BASE_URL . '?resetToken=' . $token;
 
                         $mail->send();
