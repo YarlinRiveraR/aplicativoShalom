@@ -3,7 +3,7 @@
 <!-- Start Content -->
 <div class="container py-5">
     <?php if ($data['verificar']['verify'] == 1) { ?>
-        
+
         <div class="row">
             <div class="col-3">
                 <div class="nav flex-column nav-pills" id="v-pills-tab" role="tablist" aria-orientation="vertical">
@@ -48,8 +48,8 @@
                                         <hr>
                                         <p><?php echo $_SESSION['nombreCliente']; ?></p>
                                         <p><i class="fas fa-envelope"></i> <?php echo $_SESSION['correoCliente']; ?></p>
-                                        
-                                        <div class="flex-column-perfil">                                                                
+
+                                        <div class="flex-column-perfil">
                                             <a class="btn btn-danger" href="<?php echo BASE_URL . 'clientes/salir'; ?>"><i class="fas fa-times-circle"></i> Cerrar Sesión</a>
                                         </div>
                                     </div>
@@ -94,6 +94,59 @@
     <?php } ?>
 </div>
 <!-- End Content -->
+
+<div id="modalPedido" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="my-modal-title" aria-hidden="true">
+    <div class="modal-dialog modal-lg" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Estado del Pedido</h5>
+                <button class="btn-close" data-bs-dismiss="modal" aria-label="Close">
+                </button>
+            </div>
+            <div class="modal-body">
+                <div class="row">
+                    <div class="col-md-6 col-lg-4 pb-5">
+                        <div class="h-100 py-5 bg-info shadow" id="estadoEnviado">
+                            <div class="h1 text-util text-center"><i class="fa fa-truck fa-lg"></i></div>
+                            <h2 class="h5 mt-4 text-center">Pendiente</h2>
+                        </div>
+                    </div>
+
+                    <div class="col-md-6 col-lg-4 pb-5">
+                        <div class="h-100 py-5 bg-info shadow" id="estadoProceso">
+                            <div class="h1 text-util text-center"><i class="fa fa-exchange-alt"></i></div>
+                            <h2 class="h5 mt-4 text-center">Proceso</h2>
+                        </div>
+                    </div>
+
+                    <div class="col-md-6 col-lg-4 pb-5">
+                        <div class="h-100 py-5 bg-info shadow" id="estadoCompletado">
+                            <div class="h1 text-util text-center"><i class="fa fa-percent"></i></div>
+                            <h2 class="h5 mt-4 text-center">Completado</h2>
+                        </div>
+                    </div>
+                    <div class="col-md-12">
+                        <div class="table-responsive">
+                            <table class="table table-borderer table-striped table-hover align-middle" id="tablePedidos" style="width: 100%;">
+                                <thead>
+                                    <tr>
+                                        <th>Producto</th>
+                                        <th>Precio</th>
+                                        <th>Cantidad</th>
+                                        <th>SubTotal</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
 
 <?php include_once 'Views/template/footer-secundario.php'; ?>
 
