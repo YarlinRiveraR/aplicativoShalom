@@ -1,9 +1,30 @@
 const tableLista = document.querySelector("#tableListaProductos tbody");
+const tblPendientes = document.querySelector('#tblPendientes');
 let productosjson = [];
+const estadoEnviado = document.querySelector('#estadoEnviado');
+const estadoProceso = document.querySelector('#estadoProceso');
+const estadoCompletado = document.querySelector('#estadoCompletado');
 document.addEventListener("DOMContentLoaded", function() {
     if (tableLista) {
         getListaProductos();
     }
+    //cargar datos pendientes con DataTables
+    $('#tblPendientes').DataTable({
+        ajax: {
+            url: base_url + 'clientes/listarPendientes',
+            dataSrc: ''
+        },
+        columns: [
+            { data: 'id_transaccion' },
+            { data: 'monto' },
+            { data: 'fecha' },
+            { data: 'accion' }
+        ],
+        language,
+        dom,
+        buttons
+
+    });
     
 });
 
@@ -45,4 +66,40 @@ function getListaProductos() {
             }
         }
     }
+}
+
+function verPedido(idPedido) {
+    estadoEnviado.classList.remove('bg-info');
+    estadoProceso.classList.remove('bg-info');
+    estadoCompletado.classList.remove('bg-info');
+    const mPedido = new bootstrap.Modal(document.getElementById('modalPedido'));
+    const url = base_url + 'clientes/verPedido/' + idPedido;
+    const http = new XMLHttpRequest();
+    http.open('GET', url, true);
+    http.send();
+    http.onreadystatechange = function() {
+        if (this.readyState == 4 && this.status == 200) {
+            const res = JSON.parse(this.responseText);
+            let html = '';
+            if (res.pedido.proceso == 1) {
+                estadoEnviado.classList.add('bg-info');
+            } else if (res.pedido.proceso == 2) {
+                estadoProceso.classList.add('bg-info');
+            } else {
+                estadoCompletado.classList.add('bg-info');
+            }
+            res.productos.forEach(row => {
+                let subTotal = parseFloat(row.precio) * parseInt(row.cantidad);
+                html += `<tr>
+                    <td>${row.producto}</td>
+                    <td><span class="badge bg-warning">${res.moneda + ' ' + row.precio}</span></td>
+                    <td><span class="badge bg-primary">${row.cantidad}</span></td>
+                    <td>${subTotal.toFixed(2)}</td>
+                </tr>`;
+            });
+            document.querySelector('#tablePedidos tbody').innerHTML = html;
+            mPedido.show();
+        }
+    }
+
 }
