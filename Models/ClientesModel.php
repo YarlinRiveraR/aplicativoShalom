@@ -44,6 +44,21 @@ class ClientesModel extends Query{
         return $this->select($sql);
     }
 
+    public function registrarPedido($id_transaccion, $monto, $estado, $fecha, $email,
+    $nombre, $id_cliente)
+    {
+        $sql = "INSERT INTO pedidos (id_transaccion, monto, estado, fecha, email,
+        nombre, id_cliente) VALUES (?,?,?,?,?,?,?)";
+        $datos = array($id_transaccion, $monto, $estado, $fecha, $email,
+        $nombre, $id_cliente);
+        $data = $this->insertar($sql, $datos);
+        if ($data > 0) {
+            $res = $data;
+        } else {
+            $res = 0;
+        }
+        return $res;
+    }
 
     public function getProducto($id_producto)
     {
