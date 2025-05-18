@@ -38,7 +38,7 @@ function getListaProductos() {
     http.onreadystatechange = function() {
         if (this.readyState == 4 && this.status == 200) {
             const res = JSON.parse(this.responseText);
-            if (res.totalPaypal > 0) {
+            if (res.productos && res.productos.length > 0) {
                 // Reemplazar el forEach con un bucle for
                 for (let i = 0; i < res.productos.length; i++) {
                     const producto = res.productos[i];
@@ -67,6 +67,69 @@ function getListaProductos() {
         }
     }
 }
+
+function registrarPedido() {
+    const url = base_url + 'clientes/registrarPedido';
+    const http = new XMLHttpRequest();
+    http.open('POST', url, true);
+
+    // Obtener la lista de productos y el total
+    const listaCarrito = JSON.parse(localStorage.getItem('listaCarrito')) || [];
+    const httpListaProductos = new XMLHttpRequest();
+    httpListaProductos.open('POST', base_url + 'principal/listaProductos', true);
+    httpListaProductos.setRequestHeader('Content-Type', 'application/json');
+    httpListaProductos.send(JSON.stringify(listaCarrito));
+
+    httpListaProductos.onreadystatechange = function() {
+        if (this.readyState == 4 && this.status == 200) {
+            const res = JSON.parse(this.responseText);
+            http.send(JSON.stringify({
+                pedidos: {
+                    total: res.totalRaw
+                },
+                productos: listaCarrito
+            }));
+
+            http.onreadystatechange = function() {
+                if (this.readyState == 4 && this.status == 200) {
+                    console.log(this.responseText);
+                    const res = JSON.parse(this.responseText);
+                    Swal.fire("Aviso?", res.msg, res.icono);
+                    if (res.icono == 'success') {
+                        localStorage.removeItem('listaCarrito');
+                        setTimeout(() => {
+                            window.location.reload();
+                        }, 2000);
+                    }
+                }
+            }
+        }
+    }
+}
+
+btnFinalizarPago.addEventListener('click', function() {
+    // Obtener el carrito actual directamente desde localStorage
+    const carrito = localStorage.getItem('listaCarrito') ? JSON.parse(localStorage.getItem('listaCarrito')) : [];
+    if (carrito.length === 0) {
+        Swal.fire('Aviso?', 'El carrito está vacío. Agrega al menos un producto antes de finalizar tu pedido.', 'warning');
+        return;
+    }
+
+    Swal.fire({
+        title: '¿Estás seguro?',
+        text: "Este proceso es irreversible",
+        icon: 'warning',
+        showCancelButton: true,
+        confirmButtonColor: '#3085d6',
+        cancelButtonColor: '#d33',
+        confirmButtonText: 'Sí, confirmar',
+        cancelButtonText: 'Cancelar'
+    }).then((result) => {
+        if (result.isConfirmed) {
+            registrarPedido();
+        }
+    });
+});
 
 function verPedido(idPedido) {
     estadoEnviado.classList.remove('bg-info');

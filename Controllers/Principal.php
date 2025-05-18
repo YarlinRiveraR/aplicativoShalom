@@ -34,9 +34,8 @@ class Principal extends Controller
             }
         }  
         //NEW!!!      
-        $array['total'] = formatearMoneda($total);
-        //NEW!!! REVISAR!!!
-        $array['totalPaypal'] = number_format($total, 2, '.', '');
+        $array['total']     = formatearMoneda($total);
+        $array['totalRaw']  = $total; 
         $array['moneda'] = MONEDA;
         echo json_encode($array, JSON_UNESCAPED_UNICODE);
         die();
