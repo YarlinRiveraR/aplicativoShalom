@@ -47,7 +47,7 @@ class Usuarios extends Controller
             $hash = password_hash($clave, PASSWORD_DEFAULT);
 
             // Verifica si los campos 'nombre' o 'apellido' están vacíos
-            if (empty($_POST['nombre']) || empty($_POST['apellido'])) {
+            if (empty($_POST['nombre']) || empty($_POST['apellido']) || empty($_POST['correo'])) {
                 // Si están vacíos, se prepara una respuesta indicando que todos los campos son requeridos
                 $respuesta = array('msg' => 'todos los campos son requeridos', 'icono' => 'warning');
             } else {

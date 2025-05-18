@@ -41,6 +41,18 @@ document.addEventListener("DOMContentLoaded", function() {
     //submit categorias
     frm.addEventListener("submit", function(e) {
         e.preventDefault();
+
+        if (document.querySelector('#id').value) {
+            const catIn  = document.querySelector('#categoria');
+            const descIn = document.querySelector('#descripcion');
+            if (
+            catIn.value   === catIn.getAttribute('data-original') &&
+            descIn.value  === descIn.getAttribute('data-original')
+            ) {
+                return Swal.fire('Aviso','NO HAY CAMBIOS PARA GUARDAR','warning');
+            }
+        }
+        
         let data = new FormData(this);
         const url = base_url + "categorias/registrar";
         const http = new XMLHttpRequest();
@@ -96,14 +108,24 @@ function editCat(idCat) {
     http.send();
     http.onreadystatechange = function() {
         if (this.readyState == 4 && this.status == 200) {
-            const res = JSON.parse(this.responseText);
+            const res = JSON.parse(this.responseText);            
             document.querySelector('#id').value = res.id;
-            document.querySelector('#categoria').value = res.categoria;
-            document.querySelector('#descripcion').value = res.descripcion;
+            
+            const categoriaInput = document.querySelector('#categoria');
+            const descripcionInput = document.querySelector('#descripcion');
+            
+            categoriaInput.parentElement.classList.add('is-filled', 'focused');
+            descripcionInput.parentElement.classList.add('is-filled', 'focused');
+            
+            categoriaInput.value = res.categoria;
+            descripcionInput.value = res.descripcion;
+
+            categoriaInput.setAttribute('data-original', res.categoria);
+            descripcionInput.setAttribute('data-original', res.descripcion);
+            
             btnAccion.textContent = 'Actualizar';
             titleModal.textContent = "MODIFICAR CATEGORIA";
             myModal.show();
-            //$('#nuevoModal').modal('show');
         }
     }
 }

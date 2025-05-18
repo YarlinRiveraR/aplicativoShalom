@@ -85,6 +85,7 @@
                         </div>
                     </div>
                     <div class="text-end">
+                        <button class="btn btn-danger ms-4" type="button" id="btnCancelarEdicion">Cancelar</button>
                         <button class="btn btn-primary" type="submit" id="btnAccion">Registrar</button>
                     </div>
                 </form>

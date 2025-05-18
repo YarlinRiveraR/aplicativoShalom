@@ -1,5 +1,6 @@
 const frm = document.querySelector("#frmRegistro");
 const btnAccion = document.querySelector("#btnAccion");
+const btnCancelar = document.getElementById('btnCancelarEdicion');
 const containerGaleria = document.querySelector("#containerGaleria");
 let tblProductos;
 
@@ -115,17 +116,42 @@ function editPro(idPro) {
             console.log(this.responseText);
             const res = JSON.parse(this.responseText);
             document.querySelector("#id").value = res.id;
-            document.querySelector("#nombre").value = res.nombre;
-            document.querySelector("#precio").value = res.precio;
-            document.querySelector("#cantidad").value = res.cantidad;
-            document.querySelector("#categoria").value = res.id_categoria;
-            document.querySelector("#descripcion").value = res.descripcion;
             document.querySelector("#imagen_actual").value = res.imagen;
+            
+            const nombreInput = document.querySelector("#nombre");
+            const precioInput = document.querySelector("#precio");
+            const cantidadInput = document.querySelector("#cantidad");
+            const categoriaInput = document.querySelector("#categoria");
+            const descripcionInput = document.querySelector("#descripcion");
+            
+            nombreInput.parentElement.classList.add('is-filled', 'focused');
+            precioInput.parentElement.classList.add('is-filled', 'focused');
+            cantidadInput.parentElement.classList.add('is-filled', 'focused');
+            categoriaInput.parentElement.classList.add('is-filled', 'focused');
+            descripcionInput.parentElement.classList.add('is-filled', 'focused');
+            
+            nombreInput.value = res.nombre;
+            precioInput.value = res.precio;
+            cantidadInput.value = res.cantidad;
+            categoriaInput.value = res.id_categoria;
+            descripcionInput.value = res.descripcion;
+            
             btnAccion.textContent = "Actualizar";
             firstTab.show();
         }
     };
 }
+
+btnCancelar.addEventListener('click', () => {
+  frm.reset();
+  frm.querySelectorAll('.is-invalid').forEach(el => el.classList.remove('is-invalid'));
+  frm.querySelectorAll('.input-group-outline').forEach(gp => {
+    gp.classList.remove('focused','is-filled');
+  });
+  btnAccion.textContent = 'Registrar';
+  const tabList = document.querySelector('#myTab button[data-bs-target="#listaProducto"]');
+  if (tabList) new bootstrap.Tab(tabList).show();
+});
 
 function agregarImagenes(idPro) {
     const url = base_url + "productos/verGaleria/" + idPro;

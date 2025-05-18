@@ -51,11 +51,9 @@ class Productos extends Controller
             $ruta = 'assets/images/productos/';
             $nombreImg = date('YmdHis');
 
-            // Verifica si los campos 'nombre', 'precio' o 'cantidad' están vacíos
-            if (empty($nombre) || empty($precio) || empty($cantidad)) {
+            if (empty($nombre) || empty($precio) || empty($cantidad) || empty($tmp_name)) {
                 $respuesta = array('msg' => 'todo los campos son requeridos', 'icono' => 'warning');
             } else {
-                // Determina la ruta de la imagen a guardar
                 if (!empty($imagen['name'])) {
                     $destino = $ruta . $nombreImg . '.jpg';
                 } else if (!empty($_POST['imagen_actual']) && empty($imagen['name'])) {
@@ -64,7 +62,6 @@ class Productos extends Controller
                     $destino = $ruta . 'default.png';
                 }
 
-                // Si el campo 'id' está vacío, intenta registrar un nuevo producto
                 if (empty($id)) {
                     $data = $this->model->registrar($nombre, $descripcion, $precio, $cantidad, $destino, $categoria);
                     if ($data > 0) {
@@ -76,7 +73,6 @@ class Productos extends Controller
                         $respuesta = array('msg' => 'error al registrar', 'icono' => 'error');
                     }
                 } else {
-                    // Si el campo 'id' no está vacío, intenta modificar un producto existente
                     $data = $this->model->modificar($nombre, $descripcion, $precio, $cantidad, $destino, $categoria, $id);
                     if ($data == 1) {
                         if (!empty($imagen['name'])) {

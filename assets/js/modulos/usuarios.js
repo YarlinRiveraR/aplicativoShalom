@@ -33,6 +33,21 @@ document.addEventListener("DOMContentLoaded", function() {
     //submit usuarios
     frm.addEventListener("submit", function(e) {
         e.preventDefault();
+
+        if (id) {
+            const nombre   = document.querySelector('#nombre');
+            const apellido = document.querySelector('#apellido');
+            const correo   = document.querySelector('#correo');
+            const originalNombre   = nombre.getAttribute('data-original');
+            const originalApellido = apellido.getAttribute('data-original');
+            const originalCorreo   = correo.getAttribute('data-original');
+            if (nombre.value === originalNombre &&
+                apellido.value === originalApellido &&
+                correo.value === originalCorreo) {
+                return Swal.fire("Aviso?", "NO HAY CAMBIOS PARA GUARDAR", "warning");
+            }
+        }
+
         let data = new FormData(this);
         const url = base_url + "usuarios/registrar";
         const http = new XMLHttpRequest();
@@ -91,14 +106,27 @@ function editUser(idUser) {
             console.log(this.responseText);
             const res = JSON.parse(this.responseText);
             document.querySelector('#id').value = res.id;
-            document.querySelector('#nombre').value = res.nombres;
-            document.querySelector('#apellido').value = res.apellidos;
-            document.querySelector('#correo').value = res.correo;
-            document.querySelector('#clave').setAttribute('readonly', 'readonly');
+            
+            const nombreInput = document.querySelector('#nombre');
+            const apellidoInput = document.querySelector('#apellido');
+            const correoInput = document.querySelector('#correo');
+            
+            nombreInput.parentElement.classList.add('is-filled', 'focused');
+            apellidoInput.parentElement.classList.add('is-filled', 'focused');
+            correoInput.parentElement.classList.add('is-filled', 'focused');
+            
+            nombreInput.value = res.nombres;
+            apellidoInput.value = res.apellidos;
+            correoInput.value = res.correo;
+
+            nombreInput.setAttribute('data-original', res.nombres);
+            apellidoInput.setAttribute('data-original', res.apellidos);
+            correoInput.setAttribute('data-original', res.correo);
+        
+            document.querySelector('#clave').setAttribute('readonly', 'readonly');            
             btnAccion.textContent = 'Actualizar';
             titleModal.textContent = "MODIFICAR USUARIO";
             myModal.show();
-            //$('#nuevoModal').modal('show');
         }
     }
 }
