@@ -23,6 +23,8 @@ const correoRecuperar = document.querySelector("#correoRecuperar");
 const frmRecuperarNewPass = document.querySelector("#frmRecuperarNewPass");
 const btnRecuperarNew = document.querySelector("#btnRecuperarNew");
 
+const pwdComplexity = /^(?=.{8,}$)(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*\W).*$/;
+
 document.addEventListener("DOMContentLoaded", function () {
   btnRegister.addEventListener("click", function () {
     frmLogin.classList.add("d-none");
@@ -47,6 +49,9 @@ document.addEventListener("DOMContentLoaded", function () {
 
   //registro
   registrarse.addEventListener("click", function () {
+    if (!complexity.test(pwd)) {
+      return Swal.fire("Aviso?", "La contraseña debe tener ≥8 caracteres, mayúscula, minúscula, número y carácter especial.", "warning");
+    }
     if (
       nombreRegistro.value == "" ||
       correoRegistro.value == "" ||
@@ -145,6 +150,13 @@ if (resetToken) {
     e.preventDefault();
     const newPass = document.querySelector("#new_password").value.trim();
     const confirmPass = document.querySelector("#confirm_password").value.trim();
+    if (!pwdComplexity.test(newPass)) {
+      return Swal.fire(
+        "Aviso?",
+        "La contraseña debe tener al menos 8 caracteres, una mayúscula, una minúscula, un número y un carácter especial.",
+        "warning"
+      );
+    }
 
     const urlParams2 = new URLSearchParams(window.location.search);
     const resetToken2 = urlParams2.get('resetToken');

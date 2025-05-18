@@ -39,6 +39,10 @@ class Clientes extends Controller
                 $clave = $_POST['clave'];
                 $verificar = $this->model->getVerificar($correo);
                 if (empty($verificar)) {
+                    if (!preg_match('/^(?=.{8,}$)(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*\W).*$/', $clave)) {
+                        echo json_encode(['msg'=>'La contraseña debe tener al menos 8 caracteres, mayúscula, minúscula, número y carácter especial','icono'=>'warning'], JSON_UNESCAPED_UNICODE);
+                        die();
+                    }
                     $token = md5($correo);
                     $hash = password_hash($clave, PASSWORD_DEFAULT);
                     $data = $this->model->registroDirecto($nombre, $correo, $hash, $token);
@@ -222,6 +226,12 @@ class Clientes extends Controller
                 echo json_encode($mensaje, JSON_UNESCAPED_UNICODE);
                 die();
             }
+
+            if (!preg_match('/^(?=.{8,}$)(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*\W).*$/', $newPassword)) {
+                echo json_encode(['msg'=>'La contraseña debe tener al menos 8 caracteres, mayúscula, minúscula, número y carácter especial','icono'=>'warning'], JSON_UNESCAPED_UNICODE);
+                die();
+            }
+
             $hash = password_hash($newPassword, PASSWORD_DEFAULT);
             $update = $this->model->updatePassword($cliente['correo'], $hash);
             if ($update) {

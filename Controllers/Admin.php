@@ -99,6 +99,15 @@ public function resetPassword($token) {
         
         $newPassword = $_POST['new_password'];
         $confirmPassword = $_POST['confirm_password'];
+
+        if (!preg_match('/^(?=.{8,}$)(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*\W).*$/', $newPassword)) {
+            $data = [
+                'error' => 'La contraseña debe tener al menos 8 caracteres, una mayúscula, una minúscula, un número y un carácter especial.',
+                'title' => 'Restablecer Contraseña',
+                'token' => $token
+            ];
+            return $this->views->getView('admin', 'reset_password', $data);
+        }
         
         if ($newPassword !== $confirmPassword) {
             $data['error'] = 'Las contraseñas no coinciden.';
