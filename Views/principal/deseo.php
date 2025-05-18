@@ -3,12 +3,13 @@
 
 <style>
 @media (min-width: 577px) and (max-width: 1024px) {
-   #tableListaDeseo td button {
-     width: 100%;
-     margin: 7px;
-   }
- }
- </style>
+  #tableListaDeseo td button {
+    width: 100%;
+    margin: 12px;
+  }
+}
+
+</style>
 
 <!-- Start Content -->
 <div class="container py-5">

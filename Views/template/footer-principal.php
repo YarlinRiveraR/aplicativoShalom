@@ -6,7 +6,7 @@
       <div class="col-md-4">
         <h5>Shalom Pijamas</h5>
         <p><i class="fas fa-map-marker-alt"></i> Calle 4N #7E-30 Los Pinos</p>
-        <p><i class="fas fa-phone"></i> +57 300 4413069</p>
+        <p><i class="fas fa-phone"></i> +57 313 8284564</p>
         <p><i class="fas fa-envelope"></i> yacquelinepa6045@gmail.com</p>
       </div>
 
@@ -86,9 +86,6 @@
 </style>
 
 
-
-
-
 <div class="modal fade" id="modalCarrito" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
   <div class="modal-dialog modal-lg">
     <div class="modal-content">
@@ -119,15 +116,20 @@
       </div>
       <div class="d-flex justify-content-around mb-3">
         <h3 id="totalGeneral"></h3>
+
         <?php if (!empty($_SESSION['correoCliente'])) { ?>
           <a class="btn btn-outline-primary" href="<?php echo BASE_URL . 'clientes'; ?>">Procesar Pedido</a>
         <?php } else { ?>
           <a class="btn btn-outline-primary" href="#" onclick="abrirModalLogin();">Login</a>
         <?php } ?>
+        
       </div>
     </div>
   </div>
 </div>
+
+
+
 
 
 <!-- Login directo -->
