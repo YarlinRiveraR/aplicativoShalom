@@ -1,8 +1,8 @@
 productosMinimos();
 topProductos();
 
-function topProductos() {
-    const url = base_url + "admin/topProductos";
+function productosMinimos() {
+    const url = base_url + "admin/productosMinimos";
     const http = new XMLHttpRequest();
     http.open("GET", url, true);
     http.send();
@@ -13,11 +13,11 @@ function topProductos() {
             let nombre = [];
             let cantidad = [];
             for (let i = 0; i < res.length; i++) {
-                nombre.push(res[i]['producto']);
-                cantidad.push(res[i]['total']);
+                nombre.push(res[i]['nombre']);
+                cantidad.push(res[i]['cantidad']);
             }
 
-            var ctx = document.getElementById("topProductos").getContext("2d");
+            var ctx = document.getElementById("chart4").getContext("2d");
 
             var gradientStroke1 = ctx.createLinearGradient(0, 0, 0, 300);
             gradientStroke1.addColorStop(0, "#ee0979");
@@ -71,8 +71,9 @@ function topProductos() {
     };
 }
 
-function productosMinimos() {
-    const url = base_url + "admin/productosMinimos";
+
+function topProductos() {
+    const url = base_url + "admin/topProductos";
     const http = new XMLHttpRequest();
     http.open("GET", url, true);
     http.send();
@@ -83,11 +84,11 @@ function productosMinimos() {
             let nombre = [];
             let cantidad = [];
             for (let i = 0; i < res.length; i++) {
-                nombre.push(res[i]['nombre']);
-                cantidad.push(res[i]['cantidad']);
+                nombre.push(res[i]['producto']);
+                cantidad.push(res[i]['total']);
             }
 
-            var ctx = document.getElementById("chart4").getContext("2d");
+            var ctx = document.getElementById("topProductos").getContext("2d");
 
             var gradientStroke1 = ctx.createLinearGradient(0, 0, 0, 300);
             gradientStroke1.addColorStop(0, "#ee0979");

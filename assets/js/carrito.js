@@ -2,6 +2,7 @@ const btnAddcarrito = document.querySelectorAll(".btnAddcarrito");
 const btnCarrito = document.querySelector("#btnCantidadCarrito");
 const verCarrito = document.querySelector('#verCarrito');
 const tableListaCarrito = document.querySelector('#tableListaCarrito tbody');
+
 const btnAddDeseo = document.querySelectorAll(".btnAddDeseo");
 const btnDeseo = document.querySelector('#btnCantidadDeseo');
 
@@ -75,6 +76,8 @@ function cantidadDeseo() {
         btnDeseo.textContent = 0;
     }
 }
+
+//NEW!!!
 //agregar productos al carrito
 function agregarCarrito(idProducto, cantidad, talla, accion = false) {
     if (localStorage.getItem("listaCarrito") == null) {
@@ -82,17 +85,13 @@ function agregarCarrito(idProducto, cantidad, talla, accion = false) {
     } else {
         let listaExiste = JSON.parse(localStorage.getItem("listaCarrito"));
         for (let i = 0; i < listaExiste.length; i++) {
-            //NEW!!!
-            if (accion) {
-                eliminarListaDeseo(idProducto);
-            }
             if (listaExiste[i]["idProducto"] == idProducto) {
                 alertaPerzanalizada("EL PRODUCTO YA ESTA AGREGADO", "warning")
                 return;
             }
         }
         listaCarrito.concat(localStorage.getItem("listaCarrito"));
-    }
+    }    
     listaCarrito.push({
         idProducto: idProducto,
         cantidad: cantidad,
@@ -100,9 +99,11 @@ function agregarCarrito(idProducto, cantidad, talla, accion = false) {
     });
     localStorage.setItem("listaCarrito", JSON.stringify(listaCarrito));
     alertaPerzanalizada("PRODUCTO AGREGADO AL CARRITO", "success");
-
+    if (accion) {
+        eliminarListaDeseo(idProducto, false);
+    }
+    
     cantidadCarrito();
-
 }
 
 function cantidadCarrito() {
@@ -175,7 +176,6 @@ function eliminarListaCarrito(idProducto) {
     cantidadCarrito();
     alertaPerzanalizada("PRODUCTO ELIMINADO DEL CARRITO", "success")
 }
-
 //cambiar la cantidad
 function cambiarCantidad() {
     let listaCantidad = document.querySelectorAll('.agregarCantidad');
@@ -188,7 +188,6 @@ function cambiarCantidad() {
     }
 }
 
-//incrementar la cantidad
 function incrementarCantidad(idProducto, cantidad) {
     for (let i = 0; i < listaCarrito.length; i++) {
         if (listaCarrito[i]['idProducto'] == idProducto) {

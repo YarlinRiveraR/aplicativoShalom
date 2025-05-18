@@ -25,7 +25,6 @@ document.addEventListener("DOMContentLoaded", function() {
         buttons
 
     });
-    
 });
 
 function getListaProductos() {
@@ -68,6 +67,8 @@ function getListaProductos() {
     }
 }
 
+
+
 function verPedido(idPedido) {
     estadoEnviado.classList.remove('bg-info');
     estadoProceso.classList.remove('bg-info');
@@ -90,11 +91,13 @@ function verPedido(idPedido) {
             }
             res.productos.forEach(row => {
                 let subTotal = parseFloat(row.precio) * parseInt(row.cantidad);
+                let precioFormato = formatearPeso(parseFloat(row.precio));
+                let subTotalFormato = formatearPeso(subTotal);
                 html += `<tr>
                     <td>${row.producto}</td>
-                    <td><span class="badge bg-warning">${res.moneda + ' ' + row.precio}</span></td>
+                    <td><span class="badge bg-warning">${res.moneda + ' ' + precioFormato}</span></td>
                     <td><span class="badge bg-primary">${row.cantidad}</span></td>
-                    <td>${subTotal.toFixed(2)}</td>
+                    <td>${subTotalFormato}</td>
                 </tr>`;
             });
             document.querySelector('#tablePedidos tbody').innerHTML = html;
