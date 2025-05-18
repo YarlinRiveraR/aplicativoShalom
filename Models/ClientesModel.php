@@ -59,11 +59,7 @@ class ClientesModel extends Query{
         }
         return $res;
     }
-    public function getProducto($id_producto)
-    {
-        $sql = "SELECT * FROM productos WHERE id = $id_producto";
-        return $this->select($sql);
-    }
+
     public function registrarDetalle($producto, $precio, $cantidad, $id_pedido, $id_producto)
     {
         $sql = "INSERT INTO detalle_pedidos (producto, precio, cantidad, id_pedido, id_producto) VALUES (?,?,?,?,?)";
@@ -90,6 +86,12 @@ class ClientesModel extends Query{
     {
         $sql = "SELECT d.* FROM pedidos p INNER JOIN detalle_pedidos d ON p.id = d.id_pedido WHERE p.id = $idPedido";
         return $this->selectAll($sql);
+    }
+
+    public function getProducto($id_producto)
+    {
+        $sql = "SELECT * FROM productos WHERE id = $id_producto";
+        return $this->select($sql);
     }
 
     //NEW!!!

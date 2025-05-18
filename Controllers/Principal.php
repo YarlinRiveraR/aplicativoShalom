@@ -8,6 +8,7 @@ class Principal extends Controller
         parent::__construct();
         session_start();
     }
+
     //obtener producto a partir de la lista de carrito
     public function listaProductos()
     {

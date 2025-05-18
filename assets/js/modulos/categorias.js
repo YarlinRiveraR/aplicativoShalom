@@ -13,7 +13,15 @@ document.addEventListener("DOMContentLoaded", function() {
         columns: [
             { data: "id" },
             { data: "categoria" },
-            { data: "descripcion" },
+            { 
+              data: "descripcion",
+              render: data => {
+                if (!data) return "";
+                return data.length > 45 
+                  ? data.substr(0,45) + "…" 
+                  : data;
+              }
+            },
             { data: "accion" },
         ],
         language,

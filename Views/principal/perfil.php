@@ -3,6 +3,7 @@
 <!-- Start Content -->
 <div class="container py-5">
     <?php if ($data['verificar']['verify'] == 1) { ?>
+
         <div class="row">
             <div class="col-3">
                 <div class="nav flex-column nav-pills" id="v-pills-tab" role="tablist" aria-orientation="vertical">
@@ -47,8 +48,8 @@
                                         <hr>
                                         <p><?php echo $_SESSION['nombreCliente']; ?></p>
                                         <p><i class="fas fa-envelope"></i> <?php echo $_SESSION['correoCliente']; ?></p>
-                                        
-                                        <div class="flex-column-perfil">                                                                
+
+                                        <div class="flex-column-perfil">
                                             <a class="btn btn-danger" href="<?php echo BASE_URL . 'clientes/salir'; ?>"><i class="fas fa-times-circle"></i> Cerrar Sesión</a>
                                         </div>
                                     </div>
