@@ -6,7 +6,7 @@
       <div class="col-md-4">
         <h5>Shalom Pijamas</h5>
         <p><i class="fas fa-map-marker-alt"></i> Calle 4N #7E-30 Los Pinos</p>
-        <p><i class="fas fa-phone"></i> +57 313 8284564</p>
+        <p><i class="fas fa-phone"></i> +57 300 4413069</p>
         <p><i class="fas fa-envelope"></i> yacquelinepa6045@gmail.com</p>
       </div>
 

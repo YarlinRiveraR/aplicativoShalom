@@ -28,7 +28,7 @@ function getListaDeseo() {
                     <span class="text-white badge bg-primary">${producto.cantidad}</span>
                     </td>
                     <td>
-                    <button class="btn btn-danger btnEliminarDeseo me-4" type="button" prod="${producto.id}"><i class="fas fa-trash"></i></button>
+                    <button class="btn btn-danger btnEliminarDeseo  me-4" type="button" prod="${producto.id}"><i class="fas fa-trash"></i></button>
                     <button class="btn btn-primary btnAddCart" type="button" prod="${producto.id}"><i class="fas fa-cart-plus"></i></button>
                     </td>
                 </tr>`;
