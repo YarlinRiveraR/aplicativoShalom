@@ -9,7 +9,6 @@
                 </div>
                 <div class="text-end pt-1">
                     <p class="text-sm mb-0 text-capitalize">Pendientes</p>
-                    <h4 class="mb-0"><?php echo $data['pendientes']['total']; ?></h4>
                 </div>
             </div>
         </div>
@@ -22,7 +21,6 @@
                 </div>
                 <div class="text-end pt-1">
                     <p class="text-sm mb-0 text-capitalize">Proceso</p>
-                    <h4 class="mb-0"><?php echo $data['procesos']['total']; ?></h4>
                 </div>
             </div>
         </div>
@@ -47,7 +45,6 @@
                 </div>
                 <div class="text-end pt-1">
                     <p class="text-sm mb-0 text-capitalize">Productos</p>
-                    <h4 class="mb-0"><?php echo $data['productos']['total']; ?></h4>
                 </div>
             </div>
         </div>
