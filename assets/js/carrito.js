@@ -63,7 +63,7 @@ function agregarDeseo(idProducto, talla) {
         talla: talla,
     });
     localStorage.setItem('listaDeseo', JSON.stringify(listaDeseo));
-    Swal.fire('Aviso?', 'PRODUCTO AGREGADO A LA LISTA DE DESEOS', 'success');
+    alertaPerzanalizada('Aviso?', 'PRODUCTO AGREGADO A LA LISTA DE DESEOS', 'success');
     cantidadDeseo();
 }
 

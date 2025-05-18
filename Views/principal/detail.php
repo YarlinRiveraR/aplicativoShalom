@@ -1,6 +1,5 @@
 <?php include_once 'Views/template/header-secundario.php'; ?>
 
-
 <!-- Open Content -->
 <section class="bg-light">
     <div class="container pb-5">
@@ -9,14 +8,13 @@
                 <div class="card mb-3">
                     <img class="card-img img-fluid" src="<?php echo BASE_URL . $data['producto']['imagen']; ?>" alt="Card image cap" id="product-detail">
                 </div>
-
             </div>
-            <!-- col end -->
             <div class="col-lg-7 mt-5">
                 <div class="card">
                     <div class="card-body">
                         <h1 class="h2"><?php echo $data['producto']['nombre']; ?></h1>
-                        <p class="h3 py-2">$ <?php echo number_format($data['producto']['precio'], 0, '', '.') . ' ' . MONEDA; ?></p>
+                        <p class="h3 py-2">$ <?php echo $data['producto']['precio'] . ' ' . MONEDA; ?></p>
+
                         <ul class="list-inline">
                             <li class="list-inline-item">
                                 <h6>Categoria</h6>
@@ -28,6 +26,7 @@
 
                         <h6>Descripción:</h6>
                         <p><?php echo $data['producto']['descripcion']; ?></p>
+
                         <form action="" method="GET">
                             <input type="hidden" id="idProducto" value="<?php echo $data['producto']['id']; ?>">
                             <div class="row">
@@ -56,7 +55,7 @@
                                     </ul>
                                 </div>
                             </div>
-                            <div class="row pb-3">
+                             <div class="row pb-3">
                                 <div class="col d-grid">
                                     <button type="button" class="btn btn-success btn-lg" id="btnAddCart">Añadir al carrito</button>
                                 </div>
@@ -67,19 +66,19 @@
                                 </div>
                             </div>
                         </form>
+
                     </div>
                 </div>
             </div>
         </div>
     </div>
 </section>
-<!-- Close Content -->
 
 <!-- Start Article -->
 <section class="py-5">
     <div class="container">
         <div class="row text-left p-2 pb-3">
-            <h4>Productos Relacionados</h4>
+            <h4 class="text-success" style="font-size: 28px; font-weight: bold;">Productos Relacionados</h4>
         </div>
         
         <!--Start Carousel Wrapper-->
@@ -87,7 +86,7 @@
             <?php foreach ($data['relacionados'] as $producto) { ?>
                 <div class="p-2 pb-3">
                     <div class="product-wap card rounded-0">
-                        <div class="card rounded-0">
+                        <div class="card rounded-0 card-prod position-relative">
                             <img class="card-img rounded-0 img-fluid" src="<?php echo BASE_URL . $producto['imagen']; ?>">
                             <div class="card-img-overlay rounded-0 product-overlay d-flex align-items-center justify-content-center">
                                 <ul class="list-unstyled">
@@ -107,12 +106,10 @@
                 </div>
             <?php } ?>
         </div>
-
-
     </div>
 </section>
-<!-- End Article -->
 
+<!-- CSS personalizado -->
 <style>
   /* Título "Productos Relacionados" en negro */
   .text-success {
@@ -235,12 +232,10 @@
   }
 </style>
 
-
 <?php include_once 'Views/template/footer-secundario.php'; ?>
 
 <script src="<?php echo BASE_URL; ?>assets/js/modulos/detail.js"></script>
 <script src="<?php echo BASE_URL; ?>assets/js/modulos/listaDeseo.js"></script>
-<!-- Start Slider Script -->
 <script src="<?php echo BASE_URL; ?>assets/js/slick.min.js"></script>
 <script>
     $('#carousel-related-product').slick({
@@ -249,32 +244,12 @@
         slidesToShow: 4,
         slidesToScroll: 3,
         dots: true,
-        responsive: [{
-                breakpoint: 1024,
-                settings: {
-                    slidesToShow: 3,
-                    slidesToScroll: 3
-                }
-            },
-            {
-                breakpoint: 600,
-                settings: {
-                    slidesToShow: 2,
-                    slidesToScroll: 3
-                }
-            },
-            {
-                breakpoint: 480,
-                settings: {
-                    slidesToShow: 2,
-                    slidesToScroll: 3
-                }
-            }
+        responsive: [
+            { breakpoint: 1024, settings: { slidesToShow: 3, slidesToScroll: 3 } },
+            { breakpoint: 600, settings: { slidesToShow: 2, slidesToScroll: 3 } },
+            { breakpoint: 480, settings: { slidesToShow: 2, slidesToScroll: 3 } }
         ]
     });
 </script>
-<!-- End Slider Script -->
-
 </body>
-
 </html>
