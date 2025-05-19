@@ -57,6 +57,20 @@ class Admin extends Controller
                         $mail->setFrom('pijamas.shalom.notificaciones@gmail.com', TITLE);
                         $mail->addAddress($correo);
 
+                        //Imagenes
+                        $mail->addEmbeddedImage(
+                            __DIR__ . '/../assets/images/facebook-logo-black.png',
+                            'facebook_logo'
+                        );
+                        $mail->addEmbeddedImage(
+                            __DIR__ . '/../assets/images/instagram-logo-black.png',
+                            'instagram_logo'
+                        );
+                        $mail->addEmbeddedImage(
+                            __DIR__ . '/../assets/images/logo_shalom_circularmodified_3.png',
+                            'logo_shalom'
+                        );
+
                         // Contenido del correo
                         $mail->isHTML(true);
                         $mail->Subject = 'Recuperación de Contraseña - ' . TITLE;
