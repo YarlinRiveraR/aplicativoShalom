@@ -25,7 +25,7 @@ class Clientes extends Controller
         $data['categorias'] = $this->model->getCategorias();
         $data['verificar'] = $this->model->getVerificar($_SESSION['correoCliente']);
         $this->views->getView('principal', "perfil", $data);
-    }
+        }
 
     // registrar un cliente directamente si aún no tiene cuenta
     public function registroDirecto()
@@ -39,10 +39,6 @@ class Clientes extends Controller
                 $clave = $_POST['clave'];
                 $verificar = $this->model->getVerificar($correo);
                 if (empty($verificar)) {
-                    if (!preg_match('/^(?=.{8,}$)(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*\W).*$/', $clave)) {
-                        echo json_encode(['msg'=>'La contraseña debe tener al menos 8 caracteres, mayúscula, minúscula, número y carácter especial','icono'=>'warning'], JSON_UNESCAPED_UNICODE);
-                        die();
-                    }
                     $token = md5($correo);
                     $hash = password_hash($clave, PASSWORD_DEFAULT);
                     $data = $this->model->registroDirecto($nombre, $correo, $hash, $token);
@@ -66,63 +62,39 @@ class Clientes extends Controller
     //enviar un correo de verificación al cliente
     public function enviarCorreo()
     {
-        // Recibimos correo y token por POST
-        if (isset($_POST['correo'], $_POST['token'])) {
-            $correo = $_POST['correo'];
-            $token  = $_POST['token'];
-
-            $cliente = $this->model->getVerificar($correo);
-            $nombre  = $cliente['nombre'] ?? 'Cliente';
-
-            ob_start();
-            include __DIR__ . '/../Views/principal/email_registrarCuenta.php';
-            $htmlBody = ob_get_clean();
-
+        if (isset($_POST['correo']) && isset($_POST['token'])) {
             $mail = new PHPMailer(true);
             try {
                 //Configuración del servidor
-                $mail->isSMTP();
-                $mail->Host       = HOST_SMTP;
-                $mail->SMTPAuth   = true;
-                $mail->Username   = USER_SMTP;
-                $mail->Password   = PASS_SMTP;
-                $mail->SMTPSecure = PHPMailer::ENCRYPTION_SMTPS;
-                $mail->Port       = PUERTO_SMTP;
-                $mail->CharSet    = 'UTF-8';
+                $mail->SMTPDebug = 0;                      //Habilitar salida detallada para depuración
+                $mail->isSMTP();                                            //Enviar utilizando SMTP
+                $mail->Host       = HOST_SMTP;                     //Establecer el servidor SMTP para enviar a través de él
+                $mail->SMTPAuth   = true;                                   //Habilitar autenticación SMTP
+                $mail->Username   = USER_SMTP;                     //Nombre de usuario SMTP
+                $mail->Password   = PASS_SMTP;                               //Contraseña SMTP
+                $mail->SMTPSecure = PHPMailer::ENCRYPTION_SMTPS;            //Habilitar cifrado TLS implícito
+                $mail->Port       = PUERTO_SMTP;                                    //Puerto TCP para conectarse; usa 587 si has configurado `SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS`
+
+                $mail->CharSet = 'UTF-8';
 
                 //Destinatarios
                 $mail->setFrom('pijamas.shalom.notificaciones@gmail.com', TITLE);
-                $mail->addAddress($correo);
-
-                //Imagenes
-                $mail->addEmbeddedImage(
-                    __DIR__ . '/../assets/images/facebook-logo-black.png',
-                    'facebook_logo'
-                );
-                $mail->addEmbeddedImage(
-                    __DIR__ . '/../assets/images/instagram-logo-black.png',
-                    'instagram_logo'
-                );
-                $mail->addEmbeddedImage(
-                    __DIR__ . '/../assets/images/logo_shalom_circularmodified_3.png',
-                    'logo_shalom'
-                );
+                $mail->addAddress($_POST['correo']);
 
                 //Contenido
-                $mail->isHTML(true);
-                $mail->Subject = 'Verifica tu cuenta en ' . TITLE;
-                $mail->Body    = $htmlBody;
-                $mail->AltBody = 'Para verificar tu cuenta visita: ' . BASE_URL . 'clientes/verificarCorreo/' . $token;
+                $mail->isHTML(true);                                  //Establecer formato de correo como HTML
+                $mail->Subject = 'Mensaje desde la: ' . TITLE;
+                $mail->Body    = 'Para verificar tu correo en nuestra tienda <a href="' . BASE_URL . 'clientes/verificarCorreo/' . $_POST['token'] . '">CLIC AQUÍ</a>';
+                $mail->AltBody = 'GRACIAS POR LA PREFERENCIA';
 
                 $mail->send();
-                $mensaje = ['msg'=>'CORREO ENVIADO, REVISA TU BANDEJA DE ENTRADA - SPAM','icono'=>'success'];
+                $mensaje = array('msg' => 'CORREO ENVIADO, REVISA TU BANDEJA DE ENTRADA - SPAN', 'icono' => 'success');
             } catch (Exception $e) {
-                $mensaje = ['msg'=>'ERROR AL ENVIAR CORREO: '.$mail->ErrorInfo,'icono'=>'error'];
+                $mensaje = array('msg' => 'ERROR AL ENVIAR CORREO: ' . $mail->ErrorInfo, 'icono' => 'error');
             }
         } else {
-            $mensaje = ['msg'=>'DATOS INCOMPLETOS','icono'=>'error'];
+            $mensaje = array('msg' => 'ERROR FATAL: ', 'icono' => 'error');
         }
-
         echo json_encode($mensaje, JSON_UNESCAPED_UNICODE);
         die();
     }
@@ -164,10 +136,11 @@ class Clientes extends Controller
             die();
         }
     }
-    
+
     //NEW!!!
     // Recuperar contraseña (correo)
-    public function sendRecovery() {
+    public function sendRecovery()
+    {
         if (isset($_POST['email']) && !empty($_POST['email'])) {
             $correo = $_POST['email'];
             $cliente = $this->model->getVerificar($correo);
@@ -175,12 +148,6 @@ class Clientes extends Controller
                 $token = md5(uniqid(rand(), true));
                 $update = $this->model->updateToken($correo, $token);
                 if ($update) {
-                     $nombre = $cliente['nombre'] ?? 'Cliente';
-
-                    ob_start();
-                    include __DIR__ . '/../Views/principal/email_recuperarContraseña.php';
-                    $htmlBody = ob_get_clean();
-
                     $mail = new PHPMailer(true);
                     try {
                         $mail->SMTPDebug = 0;
@@ -197,23 +164,9 @@ class Clientes extends Controller
                         $mail->setFrom('pijamas.shalom.notificaciones@gmail.com', TITLE);
                         $mail->addAddress($correo);
 
-                        //Imagenes
-                        $mail->addEmbeddedImage(
-                            __DIR__ . '/../assets/images/facebook-logo-black.png',
-                            'facebook_logo'
-                        );
-                        $mail->addEmbeddedImage(
-                            __DIR__ . '/../assets/images/instagram-logo-black.png',
-                            'instagram_logo'
-                        );
-                        $mail->addEmbeddedImage(
-                            __DIR__ . '/../assets/images/logo_shalom_circularmodified_3.png',
-                            'logo_shalom'
-                        );
-                        
                         $mail->isHTML(true);
                         $mail->Subject = 'Recuperación de Contraseña - ' . TITLE;
-                        $mail->Body    = $htmlBody;
+                        $mail->Body    = 'Para recuperar tu contraseña, haz clic en el siguiente enlace: <a href="' . BASE_URL . '?resetToken=' . $token . '">Recuperar Contraseña</a>';
                         $mail->AltBody = 'Para recuperar tu contraseña, visita: ' . BASE_URL . '?resetToken=' . $token;
 
                         $mail->send();
@@ -235,7 +188,8 @@ class Clientes extends Controller
     }
 
     // Permite al cliente restablecer su contraseña usando el token recibido por correo
-    public function resetPassword($token){
+    public function resetPassword($token)
+    {
         $cliente = $this->model->getClienteByToken($token);
         if (empty($cliente)) {
             header('Location: ' . BASE_URL . '?msg=token_invalido');
@@ -254,12 +208,6 @@ class Clientes extends Controller
                 echo json_encode($mensaje, JSON_UNESCAPED_UNICODE);
                 die();
             }
-
-            if (!preg_match('/^(?=.{8,}$)(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*\W).*$/', $newPassword)) {
-                echo json_encode(['msg'=>'La contraseña debe tener al menos 8 caracteres, mayúscula, minúscula, número y carácter especial','icono'=>'warning'], JSON_UNESCAPED_UNICODE);
-                die();
-            }
-
             $hash = password_hash($newPassword, PASSWORD_DEFAULT);
             $update = $this->model->updatePassword($cliente['correo'], $hash);
             if ($update) {
@@ -271,7 +219,6 @@ class Clientes extends Controller
             echo json_encode($mensaje, JSON_UNESCAPED_UNICODE);
             die();
         } else {
-            // Para solicitudes GET, redirigimos o devolvemos un error
             $mensaje = array('msg' => 'Método no permitido', 'icono' => 'error');
             echo json_encode($mensaje, JSON_UNESCAPED_UNICODE);
             die();
@@ -279,56 +226,46 @@ class Clientes extends Controller
     }
 
     //registrar pedidos realizados por un cliente
-    public function registrarPedido()
-    {
-        $datos = file_get_contents('php://input');
-        $json = json_decode($datos, true);
-        $pedidos = $json['pedidos'];
-        $productos = $json['productos'];
-        $total = $json['pedidos']['total'];
-        if (is_array($pedidos) && is_array($productos)) {
-            
-            //$monto = 0.00; // Inicializa el monto del pedido
+    public function registrarPedido() {
+    $datos = file_get_contents('php://input');
+    $json = json_decode($datos, true);
+    $pedidos = $json['pedidos'];
+    $productos = $json['productos'];
+    $total = $json['pedidos']['total'];
 
-            // Calcular el monto total del pedido
-            // foreach ($productos as $producto) {
-            //     $monto += $producto['precio'] * $producto['cantidad'];
-            // }
+    if (is_array($pedidos) && is_array($productos)) {
+        $id_transaccion = uniqid();
+        $estado = "COMPLETED";
+        $fecha = date('Y-m-d H:i:s');
+        $email = $_SESSION['correoCliente'];
+        $nombre = $_SESSION['nombreCliente'];
+        $id_cliente = $_SESSION['idCliente'];
 
-            $monto = $total; // Total del pedido calculado en el frontend
+        $data = $this->model->registrarPedido(
+            $id_transaccion,
+            $total,
+            $estado,
+            $fecha,
+            $email,
+            $nombre,
+            $id_cliente
+        );
 
-
-            $id_transaccion = uniqid();
-            // $monto = $pedidos['purchase_units'][0]['amount']['value'];
-            $estado = "COMPLETED";
-            $fecha = date('Y-m-d H:i:s');
-            $email = $_SESSION['correoCliente'];
-            $nombre = $_SESSION['nombreCliente'];
-            $id_cliente = $_SESSION['idCliente'];
-            $data = $this->model->registrarPedido(
-                $id_transaccion,
-                $monto,
-                $estado,
-                $fecha,
-                $email,
-                $nombre,
-                $id_cliente
-            );
-            if ($data > 0) {
-                foreach ($productos as $producto) {
-                    $temp = $this->model->getProducto($producto['idProducto']);
-                    $this->model->registrarDetalle($temp['nombre'], $temp['precio'], $producto['cantidad'], $data, $producto['idProducto']);
-                }
-                $mensaje = array('msg' => 'pedido registrado', 'icono' => 'success');
-            } else {
-                $mensaje = array('msg' => 'error al registrar el pedido', 'icono' => 'error');
+        if ($data > 0) {
+            foreach ($productos as $producto) {
+                $temp = $this->model->getProducto($producto['idProducto']);
+                $this->model->registrarDetalle($temp['nombre'], $temp['precio'], $producto['cantidad'], $data, $producto['idProducto']);
             }
+            // Devuelve el ID del pedido creado
+            echo json_encode(['msg' => 'Pedido registrado', 'icono' => 'success', 'id_pedido' => $data]);
         } else {
-            $mensaje = array('msg' => 'error fatal con los datos', 'icono' => 'error');
+            echo json_encode(['msg' => 'Error al registrar el pedido', 'icono' => 'error']);
         }
-        echo json_encode($mensaje);
-        die();
+    } else {
+        echo json_encode(['msg' => 'Error con los datos', 'icono' => 'error']);
     }
+    die();
+}
     //listar productos pendientes del cliente
     public function listarPendientes()
     {
@@ -351,11 +288,58 @@ class Clientes extends Controller
         die();
     }
 
-
     //cerrar la sesión del cliente
     public function salir()
     {
         session_destroy();
         header('Location: ' . BASE_URL);
     }
+    public function enviarComprobante()
+{
+    if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_FILES['comprobante'])) {
+        $id_pedido = $_POST['id_pedido'];
+        $imagen = $_FILES['comprobante'];
+        
+        // Validar que sea una imagen
+        $permitidos = ['image/jpeg', 'image/png', 'application/pdf'];
+        if (!in_array($imagen['type'], $permitidos)) {
+            echo json_encode(['msg' => 'Formato no permitido (solo JPG, PNG o PDF)', 'icono' => 'error']);
+            die();
+        }
+        
+        // Limitar tamaño a 2MB
+        if ($imagen['size'] > 2097152) {
+            echo json_encode(['msg' => 'El archivo es demasiado grande (máx 2MB)', 'icono' => 'error']);
+            die();
+        }
+        
+        // Crear directorio si no existe
+        if (!is_dir('assets/comprobantes')) {
+            mkdir('assets/comprobantes', 0777, true);
+        }
+        
+        // Generar nombre único para el archivo
+        $nombreArchivo = 'comprobante_' . $id_pedido . '_' . uniqid() . '.' . pathinfo($imagen['name'], PATHINFO_EXTENSION);
+        $destino = 'assets/comprobantes/' . $nombreArchivo;
+        
+        if (move_uploaded_file($imagen['tmp_name'], $destino)) {
+            // Actualizar en la base de datos
+            if ($this->model->guardarComprobante($id_pedido, $nombreArchivo)) {
+                echo json_encode([
+                    'msg' => 'Comprobante enviado correctamente', 
+                    'icono' => 'success',
+                    'nombreArchivo' => $nombreArchivo
+                ]);
+            } else {
+                echo json_encode(['msg' => 'Error al guardar en la base de datos', 'icono' => 'error']);
+            }
+        } else {
+            echo json_encode(['msg' => 'Error al subir el archivo', 'icono' => 'error']);
+        }
+    } else {
+        echo json_encode(['msg' => 'Acceso no autorizado', 'icono' => 'error']);
+    }
+    die();
+}
+
 }
