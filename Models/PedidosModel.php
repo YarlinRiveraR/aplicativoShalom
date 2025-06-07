@@ -28,4 +28,11 @@ class PedidosModel extends Query
         return $this->save($sql, $datos);
     }
 
- 
+    // ✅ NUEVO: Contar pedidos por estado (pendiente, proceso, finalizado)
+    public function contarPorEstado($estado)
+    {
+        $sql = "SELECT COUNT(*) AS total FROM pedidos WHERE proceso = ?";
+        return $this->select($sql, [$estado]);
+    }
+
+}
