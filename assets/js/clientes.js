@@ -202,16 +202,18 @@ function verPedido(idPedido) {
 
             // ✅ MOSTRAR BOTÓN "VER COMPROBANTE" SI EXISTE
             const contenedorBtn = document.querySelector('#contenedor-boton-comprobante');
-            if (res.comprobante && res.comprobante.archivo) {
-                contenedorBtn.innerHTML = `
-                    <a href="${base_url}assets/comprobantes/${res.comprobante.archivo}" 
-                       target="_blank" class="btn btn-success mt-3">
+                if (contenedorBtn) {
+                if (res.comprobante && res.comprobante.archivo) {
+                    contenedorBtn.innerHTML = `
+                    <a href="${base_url}assets/comprobantes/${res.comprobante.archivo}"
+                        target="_blank" class="btn btn-success mt-3">
                         <i class="fas fa-file-alt"></i> Ver Comprobante
-                    </a>`;
-            } else {
-                contenedorBtn.innerHTML = ''; // Oculta si no hay comprobante
-            }
-
+                    </a>
+                    `;
+                } else {
+                    contenedorBtn.innerHTML = '';
+                }
+                }
             mPedido.show();
         }
     }

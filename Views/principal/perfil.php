@@ -263,6 +263,7 @@
               </table>
             </div>
           </div>
+         <div id="contenedor-boton-comprobante" class="text-center mb-3"></div>
         </div>
       </div>
     </div>
