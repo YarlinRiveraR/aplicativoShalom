@@ -9,6 +9,7 @@
                 </div>
                 <div class="text-end pt-1">
                     <p class="text-sm mb-0 text-capitalize">Pendientes</p>
+                    <h4 class="mb-0"><?php echo $data['pendientes']['total']; ?></h4>
                 </div>
             </div>
         </div>
@@ -21,6 +22,7 @@
                 </div>
                 <div class="text-end pt-1">
                     <p class="text-sm mb-0 text-capitalize">Proceso</p>
+                    <h4 class="mb-0"><?php echo $data['procesos']['total']; ?></h4>
                 </div>
             </div>
         </div>
@@ -33,6 +35,7 @@
                 </div>
                 <div class="text-end pt-1">
                     <p class="text-sm mb-0 text-capitalize">Finalizados</p>
+                    <h4 class="mb-0"><?php echo $data['finalizados']['total']; ?></h4>
                 </div>
             </div>
         </div>
@@ -61,7 +64,11 @@
                         </div>
                     </div>
                 </div>
-           
+            <div class="card-body">                
+                <div class="chart-container-2">
+                    <canvas id="reportePedidos"></canvas>
+                </div>
+            </div>
         </div>
     </div>
 
