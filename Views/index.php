@@ -3,10 +3,7 @@
 
 </div>
 <!-- banner bg main end -->
-<div>
-<p>No carga XD</p>
-<imgsrc="<?php echo BASE_URL . 'assets/images/chatbot/perla.jpg'; ?> alt="logo de perla">
-</div>
+
 <!-- fashion section start -->
 <?php foreach ($data['categorias'] as $categoria) { ?>
   <div class="fashion_section">

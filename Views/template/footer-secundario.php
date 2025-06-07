@@ -252,6 +252,29 @@
   function closeNav() {
     document.getElementById("mySidenav").style.width = "0";
   }
+  
 </script>
 <script src="<?php echo BASE_URL; ?>assets/js/carrito.js"></script>
 <script src="<?php echo BASE_URL; ?>assets/js/login.js"></script>
+
+<!-- Botón de acceso al chatbot -->
+<div id="whatsapp-button">
+  <a href="https://chatbot-deepseek-83fn.onrender.com" target="_blank">
+    <img src="<?php echo BASE_URL . 'Chatbot/static/logo/Perla.jpg'; ?>" alt="Logo de Perla">
+  </a>
+</div>
+
+<style>
+  #whatsapp-button {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    z-index: 1000;
+  }
+
+  #whatsapp-button img {
+    width: 70px;
+    height: 70px;
+    border-radius: 50%;
+  }
+</style>

@@ -122,11 +122,32 @@
         <?php } else { ?>
           <a class="btn btn-outline-primary" href="#" onclick="abrirModalLogin();">Login</a>
         <?php } ?>
-        
       </div>
     </div>
   </div>
 </div>
+
+<!-- Botón de acceso al chatbot -->
+<div id="whatsapp-button">
+  <a href="https://chatbot-deepseek-83fn.onrender.com" target="_blank">
+    <img src="<?php echo BASE_URL . 'Chatbot/static/logo/Perla.jpg'; ?>" alt="Logo de Perla">
+  </a>
+</div>
+
+<style>
+  #whatsapp-button {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    z-index: 1000;
+  }
+
+  #whatsapp-button img {
+    width: 70px;
+    height: 70px;
+    border-radius: 50%;
+  }
+</style>
 
 
 
@@ -184,18 +205,18 @@
           </div>
           <!-- NEW!!! -->
           <!-- formulario de solicitud de recuperación (enviar correo) -->
-          <div class="col-md-12 d-none" id="frmRecuperarPass">            
+          <div class="col-md-12 d-none" id="frmRecuperarPass">
             <div class="form-group mb-3">
               <label for="correoRecuperar"><i class="fas fa-envelope"></i> Correo</label>
               <input id="correoRecuperar" class="form-control" type="email" name="correoRecuperar" placeholder="Correo Electrónico">
-            </div>            
+            </div>
             <a href="#" id="btnVolverLogin">Volver al incio de sesión</a>
             <div class="float-right">
               <button class="btn btn-primary" type="button" id="btnRecuperar">Recuperar contraseña</button>
             </div>
           </div>
           <!-- formulario de restablecimiento de nueva contraseña -->
-          <div class="col-md-12 d-none" id="frmRecuperarNewPass">            
+          <div class="col-md-12 d-none" id="frmRecuperarNewPass">
             <div class="form-group mb-3">
               <label for="new_password"><i class="fas fa-key"></i> Nueva Contraseña</label>
               <input id="new_password" class="form-control" type="password" name="new_password" placeholder="Nueva Contraseña">
@@ -208,7 +229,7 @@
               <button class="btn btn-primary" type="button" id="btnRecuperarNew">Restablecer Contraseña</button>
             </div>
           </div>
-          
+
         </div>
       </div>
 
@@ -231,7 +252,7 @@
 <script>
   const base_url = '<?php echo BASE_URL; ?>';
 
-  function alertaPerzanalizada(mensaje, type, titulo = '') {
+  function alertaPerzonalizada(mensaje, type, titulo = '') {
     toastr[type](mensaje, titulo)
 
     toastr.options = {
