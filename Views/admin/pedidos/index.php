@@ -17,17 +17,19 @@
             <div class="card-body">
                 <div class="table-responsive">
                     <table class="table table-bordered table-striped table-hover align-middle" style="width: 100%;" id="tblPendientes">
-                        <thead>
-                            <tr>
-                                <th>Id Transacción</th>
-                                <th>Monto</th>
-                                <th>Estado</th>
-                                <th>Fecha</th>
-                                <th>Correo</th>
-                                <th>Nombre</th>
-                                <th></th>
-                            </tr>
-                        </thead>
+                       <thead>
+    <tr>
+        <th>Transacción</th>
+        <th>Monto</th>
+        <th>Estado</th>
+        <th>Fecha</th>
+        <th>Email</th>
+        <th>Nombre</th>
+        <th>Comprobante</th> <!-- NUEVO -->
+        <th>Acción</th>
+    </tr>
+</thead>
+
                         <tbody>
                         </tbody>
                     </table>
@@ -41,16 +43,18 @@
                 <div class="table-responsive">
                     <table class="table table-bordered table-striped table-hover align-middle" style="width: 100%;" id="tblProceso">
                         <thead>
-                            <tr>
-                                <th>Id Transacción</th>
-                                <th>Monto</th>
-                                <th>Estado</th>
-                                <th>Fecha</th>
-                                <th>Correo</th>
-                                <th>Nombre</th>
-                                <th></th>
-                            </tr>
-                        </thead>
+    <tr>
+        <th>Transacción</th>
+        <th>Monto</th>
+        <th>Estado</th>
+        <th>Fecha</th>
+        <th>Email</th>
+        <th>Nombre</th>
+        <th>Comprobante</th> <!-- NUEVO -->
+       
+    </tr>
+</thead>
+
                         <tbody>
                         </tbody>
                     </table>
@@ -64,16 +68,18 @@
                 <div class="table-responsive">
                     <table class="table table-bordered table-striped table-hover align-middle" style="width: 100%;" id="tblFinalizados">
                         <thead>
-                            <tr>
-                                <th>Id Transacción</th>
-                                <th>Monto</th>
-                                <th>Estado</th>
-                                <th>Fecha</th>
-                                <th>Correo</th>
-                                <th>Nombre</th>
-                                <th></th>
-                            </tr>
-                        </thead>
+    <tr>
+        <th>Transacción</th>
+        <th>Monto</th>
+        <th>Estado</th>
+        <th>Fecha</th>
+        <th>Email</th>
+        <th>Nombre</th>
+        <th>Comprobante</th> <!-- NUEVO -->
+    
+    </tr>
+</thead>
+
                         <tbody>
                         </tbody>
                     </table>
