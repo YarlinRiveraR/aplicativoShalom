@@ -258,23 +258,62 @@
 <script src="<?php echo BASE_URL; ?>assets/js/login.js"></script>
 
 <!-- Botón de acceso al chatbot -->
-<div id="whatsapp-button">
+<div id="chatbot-button">
   <a href="https://chatbot-deepseek-83fn.onrender.com" target="_blank">
+    <span class="chatbot-bubble">¡Chatea con Perla!</span>
     <img src="<?php echo BASE_URL . 'Chatbot/static/logo/Perla.jpg'; ?>" alt="Logo de Perla">
   </a>
 </div>
 
 <style>
-  #whatsapp-button {
+  #chatbot-button {
     position: fixed;
     bottom: 20px;
     right: 20px;
     z-index: 1000;
+    display: flex;
+    align-items: center;
+    gap: 10px;
   }
 
-  #whatsapp-button img {
+  #chatbot-button img {
     width: 70px;
     height: 70px;
     border-radius: 50%;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+    transition: transform 0.2s;
+  }
+
+  #chatbot-button img:hover {
+    transform: scale(1.05);
+  }
+
+  .chatbot-bubble {
+    background-color: #fff;
+    color: #333;
+    padding: 8px 12px;
+    border-radius: 20px;
+    font-size: 14px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+    white-space: nowrap;
+    animation: fadeInRight 0.6s ease;
+  }
+
+  @keyframes fadeInRight {
+    from {
+      opacity: 0;
+      transform: translateX(20px);
+    }
+    to {
+      opacity: 1;
+      transform: translateX(0);
+    }
+  }
+
+  /* Ocultar la burbuja en pantallas pequeñas */
+  @media (max-width: 600px) {
+    .chatbot-bubble {
+      display: none;
+    }
   }
 </style>

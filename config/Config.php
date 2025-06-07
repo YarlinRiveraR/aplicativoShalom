@@ -3,7 +3,7 @@ const BASE_URL = "http://localhost/aplicativoShalom/";
 const HOST = "localhost";
 const USER = "root";
 const PASS = "";
-const DB = "aplicativo_tienda_shalom";
+const DB = "tienda-shalom";
 const CHARSET = "charset=utf8";
 const TITLE = "Shalom Pijamas";
 const MONEDA = "COP";
