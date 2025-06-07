@@ -1,4 +1,5 @@
 <?php
+
 class Pedidos extends Controller
 {
     public function __construct()
@@ -15,61 +16,64 @@ class Pedidos extends Controller
         $data['title'] = 'pedidos';
         $this->views->getView('admin/pedidos', "index", $data);
     }
-        
+
     //Lista los pedidos iniciados que hicieron los clientes
-    public function listarPedidos()
-    {
-        $data = $this->model->getPedidos(1);
-        for ($i = 0; $i < count($data); $i++) {
-            $data[$i]['accion'] = '<div class="d-flex">
-            <button class="btn btn-success" type="button" onclick="verPedido(' . $data[$i]['id'] . ')"><i class="fas fa-eye"></i></button>
-            <button class="btn btn-info" type="button" onclick="cambiarProceso(' . $data[$i]['id'] . ', 2)"><i class="fas fa-check-circle"></i></button>
+    private function formatearPedidos($estado)
+{
+    $data = $this->model->getPedidos($estado);
+    foreach ($data as &$pedido) {
+        // Acciones
+        $pedido['accion'] = '<div class="d-flex">
+            <button class="btn btn-success" type="button" onclick="verPedido(' . $pedido['id'] . ')"><i class="fas fa-eye"></i></button>
+            <button class="btn btn-info" type="button" onclick="cambiarProceso(' . $pedido['id'] . ', 2)"><i class="fas fa-check-circle"></i></button>
         </div>';
+
+        // Comprobante
+        if (!empty($pedido['comprobante'])) {
+            $comprobanteUrl = BASE_URL . 'assets/comprobantes/' . $pedido['comprobante'];
+            $pedido['comprobante'] = '<a href="' . $comprobanteUrl . '" target="_blank" class="btn btn-sm btn-primary">Ver</a>';
+        } else {
+            $pedido['comprobante'] = '<span class="badge bg-secondary">No enviado</span>';
         }
-        echo json_encode($data);
-        die();
     }
-    //Lista los pedidos aprobados para estar en proceso por el administrador
-    public function listarProceso()
-    {
-        $data = $this->model->getPedidos(2);
-        for ($i = 0; $i < count($data); $i++) {
-            $data[$i]['accion'] = '<div class="d-flex">
-            <button class="btn btn-success" type="button" onclick="verPedido(' . $data[$i]['id'] . ')"><i class="fas fa-eye"></i></button>
-            <button class="btn btn-info" type="button" onclick="cambiarProceso(' . $data[$i]['id'] . ', 3)"><i class="fas fa-check-circle"></i></button>
-        </div>';
-        }
-        echo json_encode($data);
+
+    return $data;
+}
+public function listarPedidos()
+{
+    echo json_encode($this->formatearPedidos(1));
+    die();
+}
+
+public function listarProceso()
+{
+    echo json_encode($this->formatearPedidos(2));
+    die();
+}
+
+public function listarFinalizados()
+{
+    echo json_encode($this->formatearPedidos(3));
+    die();
+}
+public function update($datos)
+{
+    $array = explode(',', $datos);
+    if (count($array) !== 2 || !is_numeric($array[0]) || !is_numeric($array[1])) {
+        echo json_encode(['msg' => 'Datos inválidos', 'icono' => 'error']);
         die();
     }
 
-    //Lista los pedidos aprobados para estar finalizados por el administrador
-    public function listarFinalizados()
-    {
-        $data = $this->model->getPedidos(3);
-        for ($i = 0; $i < count($data); $i++) {
-            $data[$i]['accion'] = '<div class="d-flex">
-            <button class="btn btn-success" type="button" onclick="verPedido(' . $data[$i]['id'] . ')"><i class="fas fa-eye"></i></button>
-        </div>';
-        }
-        echo json_encode($data);
-        die();
+    [$idPedido, $proceso] = $array;
+    $data = $this->model->actualizarEstado($proceso, $idPedido);
+    if ($data == 1) {
+        $respuesta = ['msg' => 'Pedido actualizado', 'icono' => 'success'];
+    } else {
+        $respuesta = ['msg' => 'Error al actualizar', 'icono' => 'error'];
     }
-    public function update($datos)
-    {
-        $array = explode(',', $datos);
-        $idPedido = $array[0];
-        $proceso = $array[1];
-        if (is_numeric($idPedido)) {
-            $data = $this->model->actualizarEstado($proceso, $idPedido);
-            if ($data == 1) {
-                $respuesta = array('msg' => 'pedido actualizado', 'icono' => 'success');
-            } else {
-                $respuesta = array('msg' => 'error al actualizar', 'icono' => 'error');
-            }
-            echo json_encode($respuesta);
-        }
-        die();
-    }
+    echo json_encode($respuesta);
+    die();
+}
+
 
 }
