@@ -50,7 +50,7 @@
         <th>Fecha</th>
         <th>Email</th>
         <th>Nombre</th>
-        <th>Comprobante</th> <!-- NUEVO -->
+        <th>Acción</th>
        
     </tr>
 </thead>
@@ -75,7 +75,7 @@
         <th>Fecha</th>
         <th>Email</th>
         <th>Nombre</th>
-        <th>Comprobante</th> <!-- NUEVO -->
+        <th>Acción</th>
     
     </tr>
 </thead>
