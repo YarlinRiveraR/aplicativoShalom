@@ -4,20 +4,30 @@ const myModal = new bootstrap.Modal(document.getElementById("modalPedidos"));
 
 document.addEventListener("DOMContentLoaded", function() {
     tblPendientes = $("#tblPendientes").DataTable({
+        ajax: {
+            url: base_url + "pedidos/listarPedidos",
+            dataSrc: "",
+        },
         columns: [
-            { data: "id_transaccion" },
-            { data: "monto" },
-            { data: "estado" },
-            { data: "fecha" },
-            { data: "email" },
-            { data: "nombre" },
-            { data: "accion" },
-        ],
+    { data: "id_transaccion" },
+    { data: "monto" },
+    { data: "estado" },
+    { data: "fecha" },
+    { data: "email" },
+    { data: "nombre" },
+    { data: "comprobante" }, // <--- nueva columna
+    { data: "accion" }
+],
+
         language,
         dom,
         buttons,
     });
     tblProceso = $("#tblProceso").DataTable({
+        ajax: {
+            url: base_url + "pedidos/listarProceso",
+            dataSrc: "",
+        },
         columns: [
             { data: "id_transaccion" },
             { data: "monto" },
@@ -32,6 +42,10 @@ document.addEventListener("DOMContentLoaded", function() {
         buttons,
     });
     tblFinalizados = $("#tblFinalizados").DataTable({
+        ajax: {
+            url: base_url + "pedidos/listarFinalizados",
+            dataSrc: "",
+        },
         columns: [
             { data: "id_transaccion" },
             { data: "monto" },
@@ -102,4 +116,3 @@ function verPedido(idPedido) {
         }
     }
 }
-
