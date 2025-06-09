@@ -4,7 +4,7 @@
     },
     "autoload": {
     "files": [
-      "App/Helpers/currency_helper.php"
+      "Config/Helpers/currency_helper.php"
     ]
   }
 }

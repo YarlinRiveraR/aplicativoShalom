@@ -1,17 +1,17 @@
 <?php
-const BASE_URL = "http://localhost/aplicativoShalom/";
-const HOST = "localhost";
-const USER = "root";
-const PASS = "";
-const DB = "tienda-shalom";
-const CHARSET = "charset=utf8";
-const TITLE = "Shalom Pijamas";
-const MONEDA = "COP";
-const CLIENT_ID = "AQHEaKqx7wGj892mdHzChyAoHtUBbttQB0cGRdSenDHd60EUpBAfb-5oZ8XTnc83wPPKticfsAAtwN2E";
+define('BASE_URL', 'https://'.getenv('FIREPLOY_HOST'));
+define('HOST', getenv('DB_HOST') ?: 'localhost');
+define('USER', getenv('DB_USER') ?: 'root');
+define('PASS', getenv('DB_PASSWORD') ?: '');
+define('PORT', getenv('DB_PORT') ?: '');
+define('DB', getenv('DB_DATABASE') ?: 'tienda_shalom');
+define('CHARSET', (getenv('DB_CHARSET') ?: 'utf8'));
+define('TITLE', getenv('APP_TITLE') ?: 'Shalom Pijamas');
+define('MONEDA', getenv('CURRENCY') ?: 'USD');
+define('CLIENT_ID', getenv('CLIENT_ID') ?: 'AQHEaKqx...');
 
-const USER_SMTP = "pijamas.shalom.notificaciones@gmail.com";
-const PASS_SMTP = "npdpfrihvvcxbkxd";
-const PUERTO_SMTP = 465;
-const HOST_SMTP = "smtp.gmail.com";
+define('USER_SMTP', getenv('USER_SMTP') ?: 'shalom.pijamas.notificaciones@gmail.com');
+define('PASS_SMTP', getenv('PASS_SMTP') ?: 'ramqcpwnfexdwtec');
+define('PUERTO_SMTP', getenv('PUERTO_SMTP') ?: 465);
+define('HOST_SMTP', getenv('HOST_SMTP') ?: 'smtp.gmail.com');
 ?>
-
