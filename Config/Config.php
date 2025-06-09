@@ -7,7 +7,7 @@ define('PORT', getenv('DB_PORT') ?: '');
 define('DB', getenv('DB_DATABASE') ?: 'tienda_shalom');
 define('CHARSET', (getenv('DB_CHARSET') ?: 'utf8'));
 define('TITLE', getenv('APP_TITLE') ?: 'Shalom Pijamas');
-define('MONEDA', getenv('CURRENCY') ?: 'USD');
+define('MONEDA', getenv('CURRENCY') ?: 'COP');
 define('CLIENT_ID', getenv('CLIENT_ID') ?: 'AQHEaKqx...');
 
 define('USER_SMTP', getenv('USER_SMTP') ?: 'shalom.pijamas.notificaciones@gmail.com');
