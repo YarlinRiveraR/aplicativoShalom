@@ -10,8 +10,8 @@ define('TITLE', getenv('APP_TITLE') ?: 'Shalom Pijamas');
 define('MONEDA', getenv('CURRENCY') ?: 'COP');
 define('CLIENT_ID', getenv('CLIENT_ID') ?: 'AQHEaKqx...');
 
-define('USER_SMTP', getenv('USER_SMTP') ?: 'shalom.pijamas.notificaciones@gmail.com');
-define('PASS_SMTP', getenv('PASS_SMTP') ?: 'ramqcpwnfexdwtec');
+define('USER_SMTP', getenv('USER_SMTP') ?: 'pijamas.shalom.notificaciones@gmail.com');
+define('PASS_SMTP', getenv('PASS_SMTP') ?: 'npdpfrihvvcxbkxd');
 define('PUERTO_SMTP', getenv('PUERTO_SMTP') ?: 465);
 define('HOST_SMTP', getenv('HOST_SMTP') ?: 'smtp.gmail.com');
 ?>
